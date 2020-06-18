@@ -1,8 +1,8 @@
-import isLogged from './islogged';
-
+/*import isLogged from './islogged';
+import {combineReducersnpm} from 'redux';
 
 const allReducers = () => {
-    isLogged: isLogged;
+    isLogged: isLogged
 }
 
-export default allReducers;
+export default allReducers;*/

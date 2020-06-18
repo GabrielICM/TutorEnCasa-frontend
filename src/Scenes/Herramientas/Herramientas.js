@@ -12,9 +12,7 @@ const herramientas = () => {
             <Navbar/>
          </Header>
         <Body>
-            <Text>
-                <h1>Herramientas</h1>
-            </Text>
+            
         </Body>
         <Footer/>
      </div>   
