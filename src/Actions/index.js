@@ -1,5 +1,6 @@
-export const logged =() => {
+export const logged = (datos) => {
     return {
-        type: 'SIGN_APP'
+        type: 'SIGN_APP',
+        ...datos
     };
 };
