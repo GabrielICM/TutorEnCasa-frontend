@@ -10,9 +10,11 @@ export default function App() {
     const { register, handleSubmit, errors } = useForm();
     const token = useSelector(state => state.token);
     const onSubmit = data => {
-        const formData = new FormData();
         const file = document.querySelector('.custom-file-input').files[0];
-        console.log(data, file);
+        const formData = new FormData();
+        formData.append('file', file);
+        formData.append('themes', data.themes);
+        console.log(formData);
         api('POST','/tutor/request', formData, { 'access-token': token });
     }
     console.log(errors);
