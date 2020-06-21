@@ -3,10 +3,14 @@ import {useSelector} from 'react-redux';
 import {useForm} from 'react-hook-form';
 import api from '../../Servicios/Peticion';
 import { Header, Navbar, Body, Footer,UploadPDF } from '../../Components';
+import { Redirect } from 'react-router-dom';
 
 
+export default function solicitudTutor() {
+    const logged = useSelector(state => state.login);
+    if(! logged)
+        return <Redirect to="/inicio-sesion" />
 
-export default function App() {
     const { register, handleSubmit, errors } = useForm();
     const token = useSelector(state => state.token);
     const onSubmit = data => {

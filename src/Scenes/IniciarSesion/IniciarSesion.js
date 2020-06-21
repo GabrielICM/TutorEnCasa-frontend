@@ -1,6 +1,6 @@
 import React from 'react';
 import { Header, Navbar, Footer, Body } from '../../Components';
-import{ logged } from '../../Actions';
+
 import { useForm } from 'react-hook-form';
 import Api from '../../Servicios/Peticion';
 import { useHistory } from "react-router-dom";

@@ -1,18 +1,21 @@
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
-
-import { Header, Navbar, Body, Footer } from '../../Components';
+import { Header, Body, Footer, Navbar } from '../../Components';
 import { VideoCall } from '../../Servicios/VideoCall';
 import { useForm } from 'react-hook-form';
+import { Redirect } from 'react-router-dom';
 
 const videoLlamada = () => {
+    
+    const logged = useSelector(state => state.login);
+    if(! logged)
+        return <Redirect to="/inicio-sesion" />
+
     const token = useSelector(store => {
         console.log(store);
         return (store.token) ? store.token : undefined
     });
     const [videoCall, set ] = useState(new VideoCall());
-    const [IniciarVideo, setIniciarSala] = useState(false);
-    const [IngresarVideo, setIngresarSala] = useState(false);
 
     const { register, handleSubmit, errors } = useForm();
     const crearSubmit = data => {
@@ -32,27 +35,26 @@ const videoLlamada = () => {
             }).catch((e) => console.log(e));
     };
 
-
 return(
 <div>  
     <Header>
         <Navbar/>
-        </Header>
-        <Body>
-            <form onSubmit={handleSubmit(crearSubmit)}>
-                <input type="text" name="nombre" id="nombreSala" placeholder="Sala de Video"ref={register({required: true})}/>
-                <button type="submit" onClick={() => setIniciarSala(true)}>Iniciar clase</button>
-            </form>
+    </Header>
+    <Body>
+        <form onSubmit={handleSubmit(crearSubmit)}>
+            <input type="text" name="nombre" id="nombreSala" placeholder="Sala de Video"ref={register({required: true})}/>
+            <button type="submit" >Iniciar clase</button>
+        </form>
 
-            <form onSubmit={handleSubmit(ingresarSubmit)}>
-                <input type="text" id="nombre" placeholder="Sala de Video"/>
-                <button type="submit" onClick={() => this.setIngresarSala(true)}>Ingresar clase</button>
-            </form>
-          
-            <div id="tiles"></div>
-            <audio id="audioStream" hidden="hidden"></audio> 
-    </Body>
-    <Footer/>
+        <form onSubmit={handleSubmit(ingresarSubmit)}>
+            <input type="text" id="nombre" placeholder="Sala de Video"/>
+            <button type="submit">Ingresar clase</button>
+        </form>
+    
+        <div id="tiles"></div>
+        <audio id="audioStream" hidden="hidden"></audio> 
+</Body>
+<Footer/>
 </div>
 ) 
 };

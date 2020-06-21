@@ -1,7 +1,10 @@
-import React, { useDebugValue } from 'react';
+import React, { Fragment } from 'react';
+import {useSelector} from 'react-redux';
 import {Link} from 'react-router-dom';
+import { NavbarLogin } from './index';
 const navbar = () => {
-        return  (
+        const login = useSelector(state => state.login)
+        return(    
         <nav >
             <div className="row">
                 <div className="col-sm-1"></div>
@@ -18,17 +21,21 @@ const navbar = () => {
                         </Link>   
                     </ul>
                 </div>
-                <div className="col-sm-4"></div>
-                <div className="col-sm-2">
-                    <ul className="nav">
-                        <Link to="/registro" className="nav-link"> 
-                            <li>Registrarse</li>
-                        </Link>  
-                        <Link to="inicio-sesion" className="nav-link">
-                            <li>Iniciar sesion</li>
-                        </Link>           
-                    </ul>
-                </div>              
+                <div className="col-sm-3"></div>
+                <div className="col-sm-3">
+                    {login ? 
+                        <NavbarLogin/>   
+                     :   
+                        <ul className="nav">
+                            <Link to="/registro" className="nav-link"> 
+                                <li>Registrarse</li>
+                            </Link>  
+                            <Link to="inicio-sesion" className="nav-link">
+                                <li>Iniciar sesion</li>
+                            </Link>        
+                        </ul>         
+                    }          
+            </div>         
             </div>   
         </nav>
         )
