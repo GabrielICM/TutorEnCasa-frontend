@@ -21,8 +21,8 @@ const navbar = () => {
                         </Link>   
                     </ul>
                 </div>
-                <div className="col-sm-3"></div>
-                <div className="col-sm-3">
+                <div className="col-sm-2"></div>
+                <div className="col-sm-4">
                     {login ? 
                         <NavbarLogin/>   
                      :   

@@ -10,8 +10,8 @@ function api(metodo, path, datos, headers = {}) {
 	if(datos instanceof FormData) {
 		options = {
 			method: metodo,
-			headers, // 'Content-Type': 'multipart/form-data;charset=UTF-8',
-			body: datos
+			body: datos,
+			headers
 		};
 	}
 	else {

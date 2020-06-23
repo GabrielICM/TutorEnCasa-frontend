@@ -17,7 +17,6 @@ export default function solicitudTutor() {
         const file = document.querySelector('.custom-file-input').files[0];
         const formData = new FormData();
         formData.append('file', file);
-        formData.append('themes', data.themes);
         console.log(formData);
         api('POST','/tutor/request', formData, { 'access-token': token });
     }
@@ -29,7 +28,6 @@ export default function solicitudTutor() {
                 <Navbar/>
             </Header>
             <Body>
-               
                 <div className="container">
                     <form className="form" onSubmit={handleSubmit(onSubmit)} encType="multipart/form-data">
                         <UploadPDF/>
@@ -49,5 +47,3 @@ export default function solicitudTutor() {
 </div>
 ) 
 };
-
-

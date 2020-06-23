@@ -1,11 +1,11 @@
 import React from 'react';
 
 const text = (props) => {
-        return  (<header className="" >
+        return  (
             <div>
             {props.children}
             </div>
-        </header>)
+        )
 }
 
 export default text;

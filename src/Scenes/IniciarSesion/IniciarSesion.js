@@ -26,7 +26,6 @@ const onSubmit = data => {
            alert(Respuesta.error);
         }
     });
-
 };
 
 return (
