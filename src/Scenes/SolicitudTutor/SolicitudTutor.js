@@ -30,20 +30,13 @@ export default function solicitudTutor() {
             <Body>
                 <div className="container">
                     <form className="form" onSubmit={handleSubmit(onSubmit)} encType="multipart/form-data">
-                        <UploadPDF/>
-                        <input name="themes[]" type="checkbox" value="Matemáticas" ref={register({ required: true })}/>
-                        <label htmlFor="male">Matematicas</label><br></br>
-                        <input name="themes[]" type="checkbox" value="Lenguaje" ref={register({ required: true })}/>
-                        <label htmlFor="male">Lenguaje</label><br></br>
-                        <input name="themes[]" type="checkbox" value="Biologia" ref={register({ required: true })}/>
-                        <label htmlFor="male">Biologia</label><br></br>
-                        <input name="themes[]" type="checkbox" value="Historia" ref={register({ required: true })}/>
-                        <label htmlFor="male">Historia</label><br></br>
-                        <input type="submit" value="Solicitar" className="btn btn-primary" />
+                        <h1 className="h1 mt-4 mb-4">Solicitud para realizar tutorias</h1>
+                        <p>Ingresa tu certificado de alumno regular en PDF:</p>
+                            <UploadPDF/>
                     </form>
                 </div>
             </Body>
             <Footer/>
-</div>
-) 
+    </div>
+    ) 
 };

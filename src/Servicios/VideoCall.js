@@ -40,7 +40,7 @@ class VideoCall {
     }
 
     startLocalVideo() {
-        //
+        
     }
     
     join(id, token) {

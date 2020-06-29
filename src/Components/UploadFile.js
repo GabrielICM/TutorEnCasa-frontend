@@ -13,12 +13,12 @@ const fileUpload = () => {
 
     return(
         <Fragment>
-                <div className="custom-file">
-                    <input type="file" className="custom-file-input" id="customFile" accept="application/pdf" onChange={onChange}/>
-                    <label className="custom-file-label" htmlFor="customFile">
-                        { fileName }
-                    </label>
-                </div> 
+            <div className="custom-file mt-4 upload center">
+                <input type="file" className="custom-file-input" id="customFile" accept="application/pdf" onChange={onChange}/>
+                <label className="custom-file-label" htmlFor="customFile">
+                    { fileName }
+                </label>
+            </div> 
         </Fragment>
     );  
 };
