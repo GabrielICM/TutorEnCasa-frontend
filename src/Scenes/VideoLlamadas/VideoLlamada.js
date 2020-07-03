@@ -5,8 +5,14 @@ import { VideoCall } from '../../Servicios/VideoCall';
 import { useForm } from 'react-hook-form';
 import { Redirect } from 'react-router-dom';
 
+
+
 const videoLlamada = () => {
-    
+
+    const [title, setTitle] = useState('Desactivar');
+    const botonHerramienta = () =>{
+        setTitle('Activar');
+    }
     const logged = useSelector(state => state.login);
     if(! logged)
         return <Redirect to="/inicio-sesion" />
@@ -50,9 +56,12 @@ return(
             <input type="text" id="nombre" placeholder="Sala de Video"/>
             <button type="submit">Ingresar clase</button>
         </form>
+
+    <button onClick={botonHerramienta}>{title}</button>
     
         <div id="tiles"></div>
         <audio id="audioStream" hidden="hidden"></audio> 
+        
 </Body>
 <Footer/>
 </div>
