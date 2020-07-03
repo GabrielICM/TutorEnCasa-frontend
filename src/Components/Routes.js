@@ -6,17 +6,16 @@ import {IniciarSesion,Inicio,Nosotros,Precios,Registro,Herramientas,VideoLlamada
 const routes = (props) => {
 
     return(
-    <Router>
+    <Router basename="/public">
         <Switch>
-            <Route path="public/" exact component={Inicio}/>
-            <Route path="public/precios" component={Precios}/>
-            <Route path="public/nosotros" component={Nosotros}/>
-            <Route path="public/registro" component={Registro}/>
-            <Route path="public/inicio-sesion" component={IniciarSesion}/>  
-            <Route path="public/herramientas" component={Herramientas}/>  
-            <Route path="public/video-llamadas" component={VideoLlamada}/>
-            <Route path="public/solicitud" component={SolicitudTutor}/>   
-            <Route path="public/cupones" component={Cupones}/>
+            <Route path="/" exact component={Inicio}/>
+            <Route path="/precios" component={Precios}/>
+            <Route path="/nosotros" component={Nosotros}/>
+            <Route path="/registro" component={Registro}/>
+            <Route path="/inicio-sesion" component={IniciarSesion}/>  
+            <Route path="/video-llamadas" component={VideoLlamada}/>
+            <Route path="/solicitud" component={SolicitudTutor}/>   
+            <Route path="/cupones" component={Cupones}/>
         </Switch>     
     </Router>
     )

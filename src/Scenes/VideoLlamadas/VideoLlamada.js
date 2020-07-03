@@ -15,7 +15,7 @@ const videoLlamada = () => {
     }
     const logged = useSelector(state => state.login);
     if(! logged)
-        return <Redirect to="/inicio-sesion" />
+        return <Redirect to="/inicio-sesion"/>
 
     const token = useSelector(store => {
         console.log(store);

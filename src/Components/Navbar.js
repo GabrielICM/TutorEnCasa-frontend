@@ -9,7 +9,7 @@ const navbar = () => {
             <div className="row">
                 <div className="col-sm-1"></div>
                 <div className="col-sm-4">
-                    <ul className="nav">
+                    <ul className="nav" >
                         <Link to="/" className="nav-link">
                             <li><h6 className="link">Inicio</h6></li>
                         </Link>
