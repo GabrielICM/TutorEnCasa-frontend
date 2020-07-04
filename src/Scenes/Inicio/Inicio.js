@@ -12,13 +12,13 @@ const inicio = () => {
         <div id="carouselExampleControls" className="carousel slide container pt-4 " data-ride="carousel">
             <div className="carousel-inner">
                 <div className="carousel-item active">
-                <img className="d-block w-100" src={"/Images/imagen.jpg"} alt="First slide"></img>
+                <img className="d-block w-100" src={"/public/Images/imagen.jpg"} alt="First slide"></img>
                 </div>
                 <div className="carousel-item">
-                <img className="d-block w-100" src={"/Images/imagen.jpg"} alt="Second slide"></img>
+                <img className="d-block w-100" src={"/public/Images/imagen.jpg"} alt="Second slide"></img>
                 </div>
                 <div className="carousel-item">
-                <img className="d-block w-100" src={"/Images/imagen.jpg"} alt="Third slide"></img>
+                <img className="d-block w-100" src={"/public/Images/imagen.jpg"} alt="Third slide"></img>
                 </div>
             </div>
             <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
