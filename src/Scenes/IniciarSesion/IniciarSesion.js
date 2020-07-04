@@ -44,7 +44,7 @@ return (
                 <input className="form-control " type="password" placeholder="Contraseña" name="password" ref={register({required: true, maxLength: 80})} />
             </div>
             <div className="mb-2 mt-4 center">
-                <input type="submit" />
+                <input type="submit" value="Iniciar sesion"/>
             </div>
     </form>
     </Body>
