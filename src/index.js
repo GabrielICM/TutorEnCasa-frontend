@@ -6,7 +6,6 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
-import registerServiceWorker from './registerServiceWorker';
 //import allReducers from './Reducers/allReducers';
 import {createStore} from 'redux';
 import isLogged from './Reducers/islogged';
@@ -24,4 +23,4 @@ ReactDOM.render(
     </Provider>,
     document.getElementById('root')
 );
-registerServiceWorker();
+
