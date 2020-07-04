@@ -5,7 +5,7 @@ const RolUsuario = {
     TUTOR: 1,
     2: 'ADMINISTRADOR',
     ADMINISTRADOR: 2
-}
+};
 
 export {
     RolUsuario

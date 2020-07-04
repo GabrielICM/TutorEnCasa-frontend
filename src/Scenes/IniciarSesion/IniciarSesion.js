@@ -37,12 +37,20 @@ return (
         <form className="container upload border jumbotron rounded shadow p-3 mb-5 bg-white rounded" onSubmit={handleSubmit(onSubmit)}>
             <div className="form-group">
                 <label htmlFor="email">Correo electrónico</label>   
-                <input id="email" className="form-control " type="email" placeholder="Email" name="email" ref={register({required: true, pattern: /^\S+@\S+$/i})} />
+                <input id="email" className="form-control " type="email" placeholder="Email" name="email" 
+                ref={register({required: {value: true,message: "* El correo es requerido" ,pattern: /^\S+@\S+$/i}})} />
             </div>
+            <span className="text-danger text-small d-block mb-2">
+                {errors.email && errors.email.message}
+            </span>
             <div className="form-group">
                 <label htmlFor="email">Contraseña</label> 
-                <input className="form-control " type="password" placeholder="Contraseña" name="password" ref={register({required: true, maxLength: 80})} />
+                <input className="form-control " type="password" placeholder="Contraseña" name="password" 
+                ref={register({required: {value:true, message: "* La contraseña es requerida", maxLength: 80}})} />
             </div>
+            <span className="text-danger text-small d-block mb-2">
+                {errors.password && errors.password.message}
+            </span>
             <div className="mb-2 mt-4 center">
                 <input type="submit" value="Iniciar sesion"/>
             </div>
