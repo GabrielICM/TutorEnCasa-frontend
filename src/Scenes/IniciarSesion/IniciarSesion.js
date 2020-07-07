@@ -37,15 +37,15 @@ return (
         <form className="container upload border jumbotron rounded shadow p-3 mb-5 bg-white rounded" onSubmit={handleSubmit(onSubmit)}>
             <div className="form-group">
                 <label htmlFor="email">Correo electrónico</label>   
-                <input id="email" className="form-control " type="email" placeholder="Email" name="email" 
+                <input id="email" className="form-control" type="email" placeholder="Email" name="email" 
                 ref={register({required: {value: true,message: "* El correo es requerido" ,pattern: /^\S+@\S+$/i}})} />
             </div>
             <span className="text-danger text-small d-block mb-2">
                 {errors.email && errors.email.message}
             </span>
             <div className="form-group">
-                <label htmlFor="email">Contraseña</label> 
-                <input className="form-control " type="password" placeholder="Contraseña" name="password" 
+                <label htmlFor="contraseña">Contraseña</label> 
+                <input id="constraseña" className="form-control " type="password" placeholder="Contraseña" name="password" 
                 ref={register({required: {value:true, message: "* La contraseña es requerida", maxLength: 80}})} />
             </div>
             <span className="text-danger text-small d-block mb-2">
