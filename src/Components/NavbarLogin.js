@@ -12,7 +12,10 @@ const navbarLogin = () => {
                     </Link>         
                     <Link to="/cupones" className="nav-link">
                         <li><h6 className="link">Mis cupones</h6></li>
-                    </Link>   
+                    </Link>  
+                    <Link to="/VistaAdministrador" className="nav-link">
+                                <li><h6 className="link">Administrador</h6></li>
+                    </Link>    
                 </ul>
     </nav>
     )

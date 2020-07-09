@@ -8,11 +8,12 @@ export default function Cupones() {
 
     const[ValidateInput, setValidateInput] = useState(true);
     const ShowInput = () =>{
-        if(ValidateInput)
-            setValidateInput(false);
-        else
-             setValidateInput(true);
+            setValidateInput(false);  
     }
+    const HideInput = () =>{
+            setValidateInput(true);  
+    }
+
     const { register, handleSubmit, errors } = useForm();
     const logged = useSelector(state => state.login);
     const onSubmit = data => console.log(data);
@@ -39,7 +40,7 @@ export default function Cupones() {
                 <h2>¿El cupon es para?</h2>
                     <tr>
                         <td>
-                            <input className="mr-1" name="Developer" type="radio" value="Yes" onClick={ShowInput} ref={register({ required: true })}/>
+                            <input className="mr-1" name="Developer" type="radio" value="Yes" onClick={HideInput} ref={register({ required: true })}/>
                             <label htmlFor="vincularCupon">Ti mismo</label> 
                         </td>
                     </tr>
@@ -52,19 +53,18 @@ export default function Cupones() {
                     {ValidateInput ? '' : 
                     <tr>
                         <td>
-                            <input name="vincular" type="text" />
+                        <div className="form-group"> 
+                            <label htmlFor="vincularCupon">Correo electrónico</label>   
+                            <input id="email" className="form-control " type="email" placeholder="Email" name="email" 
+                            ref={register({required: {value: true,message: "* El correo es requerido" ,pattern: /^\S+@\S+$/i}})} />
+                        </div>
+                        <span className="text-danger text-small d-block mb-2">
+                            {errors.email && errors.email.message}
+                        </span>
                         </td>
                     </tr>
                     }
                 </table>
-                <div className="form-group"> 
-                    <label htmlFor="vincularCupon">Correo electrónico</label>   
-                    <input id="email" className="form-control " type="email" placeholder="Email" name="email" 
-                    ref={register({required: {value: true,message: "* El correo es requerido" ,pattern: /^\S+@\S+$/i}})} />
-                </div>
-                <span className="text-danger text-small d-block mb-2">
-                    {errors.email && errors.email.message}
-                </span>
 
                 <input type="submit" />
             </form>

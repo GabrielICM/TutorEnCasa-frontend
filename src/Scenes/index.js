@@ -7,6 +7,7 @@ import Herramientas from './Herramientas/Herramientas';
 import VideoLlamada from './VideoLlamadas/VideoLlamada';
 import SolicitudTutor from './SolicitudTutor/SolicitudTutor';
 import Cupones from './Cupones/Cupones';
+import VistaAdministrador from './VistaAdministrador/VistaAdministrador';
 
 export{ 
     IniciarSesion,
@@ -17,5 +18,6 @@ export{
     Herramientas,
     VideoLlamada,
     SolicitudTutor,
-    Cupones
+    Cupones,
+    VistaAdministrador
 }
