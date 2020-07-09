@@ -47,20 +47,24 @@ return(
         <Navbar/>
     </Header>
     <Body>
-        <form onSubmit={handleSubmit(crearSubmit)}>
-            <input type="text" name="nombre" id="nombreSala" placeholder="Sala de Video"ref={register({required: true})}/>
-            <button type="submit" >Iniciar clase</button>
-        </form>
-
-        <form onSubmit={handleSubmit(ingresarSubmit)}>
-            <input type="text" id="nombre" placeholder="Sala de Video"/>
-            <button type="submit">Ingresar clase</button>
-        </form>
-
-    <button onClick={botonHerramienta}>{title}</button>
-    
+        <div className="container upload border jumbotron rounded shadow p-3 mb-5 bg-white rounded">
+            <form className="form-group"  onSubmit={handleSubmit(crearSubmit)}>
+                <input className="form-control " type="text" name="nombre" id="nombreSala" placeholder="Sala de Video"ref={register({required: true})}/>
+                <button type="submit" className="mt-1">Iniciar clase</button>
+            </form>
+            <form className="form-group" onSubmit={handleSubmit(ingresarSubmit)}>
+                <input className="form-control" type="text" id="nombre" placeholder="Sala de Video"/>
+                <button type="submit" className="mt-1">Ingresar clase</button>
+            </form>
+        </div>
+    {false?
+    <div>
+        <button onClick={botonHerramienta}>{title}</button>
         <div id="tiles"></div>
         <audio id="audioStream" hidden="hidden"></audio> 
+    </div> 
+    :""
+    }
         
 </Body>
 <Footer/>
