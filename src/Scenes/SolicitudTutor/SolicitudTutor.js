@@ -26,7 +26,6 @@ export default function solicitudTutor() {
     }else{
         return archivoAdjuntado;
     }
-
     }
     console.log(errors);
     

@@ -1,6 +1,5 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import { Header, Navbar, Body, Footer } from '../../Components';
-import Text from '../../Components/Text';
 
 const VistaAdministrador = () => {
     return(

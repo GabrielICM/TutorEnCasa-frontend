@@ -7,7 +7,20 @@
  */
 function api(metodo, path, datos, headers = {}) {
 	let options = {};
-	if(datos instanceof FormData) {
+
+	if(metodo == 'GET'){
+		const parametros = Object.keys(datos).map((nombre) => {
+			return `${nombre}=${datos[nombre]}`;
+		});
+		options = {
+			method: metodo,
+			headers: {
+				'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
+				...headers
+			}
+		};
+	}
+	else if(datos instanceof FormData) {
 		options = {
 			method: metodo,
 			body: datos,
