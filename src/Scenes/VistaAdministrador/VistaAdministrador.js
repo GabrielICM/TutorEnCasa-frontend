@@ -9,29 +9,32 @@ const VistaAdministrador = () => {
     const token = useSelector(state => state.token);
     const logged = useSelector(state => state.login);
     const [succes,setSuccess] = useState(false);
-    const [soliTutor,setSoliTutor] = useState([]);
+    const [soliTutor, setSoliTutor] = useState([]);
     const { register, handleSubmit, errors } = useForm();
+    const listarTutoresBoton = React.createRef();
 
     const apiSolicitud = data =>{
         api('GET','/admin/request',data,{ 'access-token': token })
             .then((Respuesta) => {
-                setSoliTutor(Respuesta.tutors)
                 if(Respuesta.status == 'success')
                 {
-                setSuccess(true);}
+                    setSoliTutor(Respuesta.tutors);
+                    console.log(soliTutor)
+                    setSuccess(true);
+                }
                 console.log(Respuesta.tutors)
             });
-        }
-    const apiValidarTutor = status => {
-        api('PUT',`/admin/tutor/${soliTutor.id}/validate`,{status},{ 'access-token': token })
+    }
+    const apiValidarTutor = (status, id) => {
+        api('PUT',`/admin/tutor/${id}/validate`,{status},{ 'access-token': token })
             .then((Respuesta) => {
-                setSoliTutor(Respuesta.tutors)
                 if(Respuesta.status == 'success')
                 {
-                setSuccess(true);}
-                console.log(Respuesta.tutors)
+                    setSuccess(true);
+                    listarTutoresBoton.current.click();
+                }
         });
-    }    
+    }
 
     const apiPeticioncertificado = (id) => {
         api('GET',`/admin/request/${id}/certificate`, {},{ 'access-token': token })
@@ -64,10 +67,10 @@ const VistaAdministrador = () => {
                         <input type="submit" value="Certificado" onClick={() => apiPeticioncertificado(solicitud.id)} />
                     </li>
                     <li className="list-group-item">
-                        <input type="submit" value="Aceptar" onClick={() =>apiValidarTutor(1)} />   
+                        <input type="submit" value="Aceptar" onClick={() =>apiValidarTutor(1, solicitud.id)} />   
                     </li>
                     <li className="list-group-item">
-                        <input type="submit"value="Rechazar" onClick={()=> apiValidarTutor(0)} />
+                        <input type="submit"value="Rechazar" onClick={()=> apiValidarTutor(0, solicitud.id)} />
                     </li>
                 </ul>
             </div>
@@ -82,7 +85,7 @@ const VistaAdministrador = () => {
          </Header>
         <Body>
             <div>
-                <input type="submit" value="Solicitudes" onClick={apiSolicitud}/>
+                <input type="submit" value="Solicitudes" ref={listarTutoresBoton} onClick={apiSolicitud}/>
                 {succes? 
                     <div>
                         {datosTutor}

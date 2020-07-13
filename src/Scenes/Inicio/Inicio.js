@@ -3,11 +3,6 @@ import { Header, Navbar, Body, Footer, Construccion } from '../../Components';
 
 const inicio = () => {
 
-    const [alInicio,setAlInicio] = useState(false);
-        const ReInicio = () =>{
-            setAlInicio(true);
-        }
-
     if(true)
         return <Construccion />
 

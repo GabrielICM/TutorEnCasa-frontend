@@ -61,8 +61,12 @@ export default function Cupones() {
     
     const onSubmitCrearcupon = async data => {
         return await api('POST','/coupon/new',data, { 'access-token': token })
-            .then((Respuesta) => {
-                window.open(Respuesta.url, '_blank');
+            .then((res) => {
+                if(res.status == 'failed') {
+                    alert(res.error);
+                } else {
+                    window.open(res.url, '_blank');
+                }
             });
     }    
     
@@ -88,11 +92,11 @@ export default function Cupones() {
                     <div className="form-group">
                         <label htmlFor="vincularCupon">Valor del cupón</label> 
                         <input className="form-control " type="text" placeholder="En pesos" name="value" 
-                        ref={register({required: {value:true, message: "* El monto a pagar es requerido", maxLength: 80}})} />
+                        ref={register({required: {value:true, message: "* El monto a pagar es requerido", maxLength: 10}})} />
                     </div>
 
                     <span className="text-danger text-small d-block mb-2">
-                        {errors.password && errors.password.message}
+                        {errors.value && errors.value.message}
                     </span>
 
                     <table className="form-group">
@@ -101,19 +105,19 @@ export default function Cupones() {
                         </h2>
                         <tr>
                             <td>
-                                <input className="mr-1" name="Developer" type="radio" value="Yes" onClick={HideInput}
-                                 ref={register({ required: true })}/>
+                                <input className="mr-1" name="Developer" type="radio" value="Yes" defaultChecked="true" onClick={HideInput}
+                                 ref={register({ required: {value:true, message: "* ¡debes seleccionar una!"}})}/>
                                 <label htmlFor="vincularCupon">Mi</label> 
                             </td>
                         </tr>
                         <tr>
                             <td className="">
-                                <input className="mr-1" id="show" name="Developer" type="radio" value="No" onClick={ShowInput}
-                                 ref={register({ required: true })}/>
+                                <input className="mr-1" id="show" name="Developer2" type="radio" value="No" onClick={ShowInput}
+                                 ref={register({ required: {value:true, message: "* ¡Debes seleccionar una!"}})}/>
                                 <label htmlFor="vincularCupon">otro</label> 
                             </td>
                         </tr>
-
+                    
                         {ValidateInput ? "" : 
 
                         <tr>

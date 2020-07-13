@@ -25,8 +25,14 @@ export default function solicitudTutor() {
             formData.append('file', file);
             formData.append('type', 0);
             console.log(formData);
-            api('POST','/tutor/request', formData, { 'access-token': token });
-        }else{
+            api('POST','/tutor/request', formData, { 'access-token': token })
+                .then((res) => {
+                    if(res.status == 'failed') {
+                        alert(res.error);
+                    }
+                });
+        }
+        else {
             console.log('no mucho...')
             return archivoAdjuntado;
         }

@@ -3,7 +3,7 @@ import { Header, Navbar, Footer, Body } from '../../Components';
 import { useForm } from 'react-hook-form';
 import Api from '../../Servicios/Peticion';
 import { useHistory } from "react-router-dom";
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
 export default function App() {
     

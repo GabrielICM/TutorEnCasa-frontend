@@ -6,6 +6,7 @@ import Registro from './Registro/Registro';
 import Herramientas from './Herramientas/Herramientas';
 import VideoLlamada from './VideoLlamadas/VideoLlamada';
 import SolicitudTutor from './SolicitudTutor/SolicitudTutor';
+import VistaClase from './VideoLlamadas/VistaClase';
 import Cupones from './Cupones/Cupones';
 import VistaAdministrador from './VistaAdministrador/VistaAdministrador';
 
@@ -19,5 +20,6 @@ export{
     VideoLlamada,
     SolicitudTutor,
     Cupones,
-    VistaAdministrador
+    VistaAdministrador,
+    VistaClase
 }

@@ -11,7 +11,7 @@ const navbarLogin = () => {
     return  (
     <nav >
         <ul className="nav">
-            <Link to="/clases" className="nav-link">
+            <Link to="/mis-tutorias" className="nav-link">
                 <li><h6 className="link">Clases</h6></li>
             </Link>
             {esTutor ?

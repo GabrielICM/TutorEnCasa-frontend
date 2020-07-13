@@ -41,7 +41,12 @@ const registro = () => {
         }
         api('POST', `/register/${step}`, data, { 'access-token': token })
             .then((res) => {
-                setValidarCuenta((params.paso && params.run) ? false : true);
+                if(res.status == 'failed') {
+                    alert(res.error);
+                }
+                else {
+                    setValidarCuenta((params.paso && params.run) ? false : true);
+                }
             });
     }
     console.log(errors);
