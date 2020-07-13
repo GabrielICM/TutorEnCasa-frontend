@@ -4,6 +4,7 @@ import { Header, Body, Footer, Navbar } from '../../Components';
 import { useSelector } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import api from '../../Servicios/Peticion';
+import { useHistory } from "react-router-dom";
 
 export default function Cupones() {
 
@@ -11,7 +12,11 @@ export default function Cupones() {
     const[FormComprar, setFormComprar] = useState(false);
     const[FormListarCupones, setFormListarCupones] = useState(false);
     const[cupones, setCupones] = useState([]);
-
+    const history = useHistory();
+    const { register, handleSubmit, errors } = useForm();
+    const logged = useSelector(state => state.login);
+    const token = useSelector(state => state.token);
+    
     const ShowInput = () =>{
             setValidateInput(false);  
     }
@@ -40,7 +45,7 @@ export default function Cupones() {
     };
 
     const DatosCupones = cupones.map((cupon) => (
-    <div className="card mt-3">
+    <div className="card mt-3 mb-5">
         <div className="card-header" key={cupon.code}>
             Codigo: {cupon.code}
         </div>
@@ -53,21 +58,14 @@ export default function Cupones() {
     </div>
     ))
     
-    const { register, handleSubmit, errors } = useForm();
-    const logged = useSelector(state => state.login);
-    const token = useSelector(state => state.token);
-
-    const onSubmitCrearcupon = data => {
-        api('POST','/coupon/new',data, { 'access-token': token })
+    
+    const onSubmitCrearcupon = async data => {
+        return await api('POST','/coupon/new',data, { 'access-token': token })
             .then((Respuesta) => {
-                console.log(Respuesta)
+                window.open(Respuesta.url, '_blank');
             });
-        }    
-        
-    const onSubmitListarCupones = data => {
-
-    };
-    console.log(errors);
+    }    
+    
     
     if(! logged)
     return <Redirect to="/inicio-sesion" />
@@ -80,7 +78,7 @@ export default function Cupones() {
             <div>
                 <div>
                     <input type="submit" value="Mis cupones"  onClick={ShowFormListar}/>
-                    <button onClick={ShowFormComprar}>Comprar Cupón</button>
+                    <input type="submit" value="Comprar cupón" onClick={ShowFormComprar}/>
                     {FormComprar? <form className="container upload border jumbotron rounded shadow p-3 mt-3 bg-white rounded" 
                     onSubmit={handleSubmit(onSubmitCrearcupon)}>
                     <div className="form-group">

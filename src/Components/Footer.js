@@ -4,9 +4,9 @@ const footer = () => {
 return (
     <footer className="footer">
         <div className="container-fluid py-1 colorPagina">
-            <h3 className="text-center">
-                Footer
-            </h3>
+            <p className="text-center">
+                Tutor en casa 2020
+            </p>
         </div>
     </footer>
     

@@ -41,7 +41,16 @@ function api(metodo, path, datos, headers = {}) {
 		};
 	}
 
-	return fetch(`https://tutorencasa.tk/api${path}`, options).then((res) => res.json());
+	return fetch(`https://tutorencasa.tk/api${path}`, options)
+		.then((res) => {
+			const contentType = res.headers.get("content-type");
+			if(contentType && contentType.indexOf("application/json") !== -1) {
+				return res.json();
+			}
+			else {
+				return res;
+			}
+		});
 }
 
 export default api;

@@ -10,7 +10,7 @@ import Box from '@material-ui/core/Box';
 
 const videoLlamada = () => {
 
-    const [value, setValue] = React.useState(2);
+    const [value, setValue] = React.useState(1);
     const [title, setTitle] = useState('Desactivar');
     const [videoCall, set ] = useState(new VideoCall());
     const { register, handleSubmit, errors } = useForm();
@@ -26,7 +26,7 @@ const videoLlamada = () => {
         console.log(store);
         return (store.token) ? store.token : undefined
     });
-    
+
     const crearSubmit = data => {
         console.log(data);
         videoCall.create(data.nombre, token)
@@ -54,12 +54,24 @@ return(
         <div className="container upload border jumbotron rounded shadow p-3 mb-5 bg-white rounded">
             <form className="form-group"  onSubmit={handleSubmit(crearSubmit)}>
                 <input className="form-control " type="text" name="nombre" id="nombreSala" placeholder="Sala de Video"ref={register({required: true})}/>
-                <button type="submit" className="mt-1">Iniciar clase</button>
+                <input type="submit" value="Iniciar clase" className="mt-1"/>
             </form>
             <form className="form-group" onSubmit={handleSubmit(ingresarSubmit)}>
                 <input className="form-control" type="text" id="nombre" placeholder="Sala de Video"/>
-                <button type="submit" className="mt-1">Ingresar clase</button>
+                <input type="submit" value="Ingresar clase" className="mt-1"/>
             </form>
+            <div>
+            <Box component="fieldset" mb={3} borderColor="transparent">
+                <Typography component="legend">Rating:</Typography>
+                <Rating
+                name="simple-controlled"
+                value={value}
+                onChange={(event, newValue) => {
+                    setValue(newValue);
+                }}
+                />
+            </Box>
+    </div>
         </div>
     {false?
     <div>
@@ -67,20 +79,9 @@ return(
         <div id="tiles"></div>
         <audio id="audioStream" hidden="hidden"></audio> 
     </div> 
+    
     :""
     }
-    <div>
-        <Box component="fieldset" mb={3} borderColor="transparent">
-        <Typography component="legend">Rating:</Typography>
-        <Rating
-          name="simple-controlled"
-          value={value}
-          onChange={(event, newValue) => {
-            setValue(newValue);
-          }}
-        />
-      </Box>
-    </div>
 </Body>
 <Footer/>
 </div>

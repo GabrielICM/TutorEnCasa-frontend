@@ -15,17 +15,21 @@ export default function solicitudTutor() {
     if(! logged)
         return <Redirect to="/inicio-sesion" />
 
-    const onSubmit = data => {
-        if(data.file){
-        const file = document.querySelector('.custom-file-input').files[0];
-        const formData = new FormData();
-        formData.append('file', file);
-        formData.append('type', 0);
-        console.log(formData);
-        api('POST','/tutor/request', formData, { 'access-token': token });
-    }else{
-        return archivoAdjuntado;
-    }
+    const formOnSubmit = data => {
+        console.log(data);
+        const files = document.querySelector('[name="file"]').files;
+        if(files.length > 0){
+            console.log('enviando...')
+            const file = files[0];
+            const formData = new FormData();
+            formData.append('file', file);
+            formData.append('type', 0);
+            console.log(formData);
+            api('POST','/tutor/request', formData, { 'access-token': token });
+        }else{
+            console.log('no mucho...')
+            return archivoAdjuntado;
+        }
     }
     console.log(errors);
     
@@ -36,14 +40,15 @@ export default function solicitudTutor() {
             </Header>
             <Body>
                 <div id="FormSolicitud" className="container mb-2 mt-4 center">
-                    <form className="form" onSubmit={handleSubmit(onSubmit)} encType="multipart/form-data">
+                    <form className="form" onSubmit={handleSubmit(formOnSubmit)} encType="multipart/form-data">
                         <div>
                         <h1 className="h1 mt-4 mb-4">Solicitud para realizar tutorias</h1>
                         <p>Ingresa tu certificado de alumno regular en formato PDF:</p>
-                            <UploadPDF/>
+                            <input type="file" name="file" id="customFile" accept="application/pdf"/>
                         </div>
                         <div className="mb-2 mt-4 center">
-                            <input type="submit" value="Enviar solicitud" name="sbtSolicitud" ref={register({required: {value:archivoAdjuntado, message: "Debe adjuntar un archivo pdf"}})} />
+                            <input type="submit" value="Enviar solicitud" name="sbtSolicitud" 
+                            ref={register({required: {value:archivoAdjuntado, message: "Debe adjuntar un archivo pdf"}})} />
                         </div>
                         <span className="text-danger text-small d-block mb-2">
                             {errors.sbtSolicitud && errors.sbtSolicitud.message}

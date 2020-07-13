@@ -21,9 +21,9 @@ const onSubmit = data => {
                 token: Respuesta.token,
                 login: true
             });
-            history.push("/");
+            history.push("/cupones");
         } else {
-           alert(Respuesta.error);
+            alert(Respuesta.error);
         }
     });
 };

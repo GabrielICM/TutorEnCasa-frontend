@@ -1,8 +1,23 @@
-import React, { Fragment } from 'react';
+import React, { useState } from 'react';
 import { Header, Navbar, Body, Footer } from '../../Components';
-import Text from '../../Components/Text';
+import { Redirect } from 'react-router-dom';
 
 const inicio = () => {
+
+    const [alInicio,setAlInicio] = useState(false);
+        const ReInicio = () =>{
+            setAlInicio(true);
+        }
+
+    if(true)
+        return( 
+        <div className="center mt-5">
+            <h1>Sitio en construccion...</h1>
+            <input type="submit" value="Ir a Iniciar sesion" onClick={ReInicio} />
+            {alInicio? <Redirect to="/inicio-sesion" /> : ""}
+        </div>
+        )    
+
     return(
      <div>
         <Header>

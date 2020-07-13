@@ -6,7 +6,6 @@ import { Redirect } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 
 const VistaAdministrador = () => {
-    
     const token = useSelector(state => state.token);
     const logged = useSelector(state => state.login);
     const [succes,setSuccess] = useState(false);
@@ -34,26 +33,26 @@ const VistaAdministrador = () => {
         });
     }    
 
-    const apiPeticioncertificado = data => {
-        api('GET',`/admin/request/${soliTutor.id}/certificate'`,data,{ 'access-token': token })
+    const apiPeticioncertificado = (id) => {
+        api('GET',`/admin/request/${id}/certificate`, {},{ 'access-token': token })
             .then((Respuesta) => {
-                setSoliTutor(Respuesta.tutors)
-                if(Respuesta.status == 'success')
-                {
-                setSuccess(true);}
-                console.log(Respuesta.tutors)
-        });
+                Respuesta.blob()
+                    .then((data) => {
+                        // 2. Create blob link to download
+                        const url = window.URL.createObjectURL(new Blob([data]));
+                        const link = document.createElement('a');
+                        link.href = url;
+                        link.setAttribute('download', `certificado.pdf`);
+                        document.body.appendChild(link);
+                        link.click();
+                        link.parentNode.removeChild(link);
+                    });
+            })
+            .catch((e) => {
+                //
+            });
     }
-    const apiRechazarSolicitud = data => {
-        api('GET','/admin/request/${soliTutor.id}/certificate',data,{ 'access-token': token })
-            .then((Respuesta) => {
-                setSoliTutor(Respuesta.tutors)
-                if(Respuesta.status == 'success')
-                {
-                setSuccess(true);}
-                console.log(Respuesta.tutors)
-        });
-    }
+
         const datosTutor = soliTutor.map((solicitud) => (
             <div className="card mt-3" style={{width: "18rem"}}>
                 <div className="card-body" key={solicitud.id}>
@@ -62,7 +61,7 @@ const VistaAdministrador = () => {
                 </div>
                 <ul className="list-group list-group-flush">
                     <li className="list-group-item">
-                        <input type="submit" onClick={apiPeticioncertificado} />
+                        <input type="submit" value="Certificado" onClick={() => apiPeticioncertificado(solicitud.id)} />
                     </li>
                     <li className="list-group-item">
                         <input type="submit" value="Aceptar" onClick={() =>apiValidarTutor(1)} />   
@@ -71,8 +70,6 @@ const VistaAdministrador = () => {
                         <input type="submit"value="Rechazar" onClick={()=> apiValidarTutor(0)} />
                     </li>
                 </ul>
-                <div className="card-body">
-                </div>
             </div>
         ))
 

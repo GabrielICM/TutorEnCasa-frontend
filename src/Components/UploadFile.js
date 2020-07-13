@@ -16,7 +16,7 @@ const fileUpload = () => {
             <div className="custom-file mt-4 upload center">
                 <input type="file" name="file" className="custom-file-input" id="customFile" accept="application/pdf" onChange={onChange}/>
                 <label className="custom-file-label" htmlFor="customFile">
-                    { fileName}
+                    {fileName}
                 </label>
             </div> 
         </Fragment>
