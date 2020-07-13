@@ -53,7 +53,7 @@ return(
     <Body>
         <div className="container upload border jumbotron rounded shadow p-3 mb-5 bg-white rounded">
             <form className="form-group"  onSubmit={handleSubmit(crearSubmit)}>
-                <input className="form-control " type="text" name="nombre" id="nombreSala" placeholder="Sala de Video"ref={register({required: true})}/>
+                <input className="form-control " type="text" name="nombre" id="nombreSala" placeholder="Sala de Video"/>
                 <input type="submit" value="Iniciar clase" className="mt-1"/>
             </form>
             <form className="form-group" onSubmit={handleSubmit(ingresarSubmit)}>
