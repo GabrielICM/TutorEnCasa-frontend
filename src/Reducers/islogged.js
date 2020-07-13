@@ -9,7 +9,6 @@ const loggedReducer = (state = INITIAL_STATE, action) =>{
         case 'SIGN_APP':
             state.login = action.login;
             state.token = action.token;
-            state.role = action.role; 
             state.user = action.user;
 
             return state;

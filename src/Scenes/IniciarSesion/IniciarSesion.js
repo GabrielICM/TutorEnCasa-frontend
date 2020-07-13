@@ -1,12 +1,12 @@
 import React from 'react';
 import { Header, Navbar, Footer, Body } from '../../Components';
-
 import { useForm } from 'react-hook-form';
 import Api from '../../Servicios/Peticion';
 import { useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from 'react-redux';
 
 export default function App() {
+    
 const { register, handleSubmit, errors } = useForm();
 const history = useHistory();
 const dispach = useDispatch();
@@ -19,7 +19,6 @@ const onSubmit = data => {
                 type: 'SIGN_APP',
                 user: Respuesta.user,
                 token: Respuesta.token,
-                role: Respuesta.role,
                 login: true
             });
             history.push("/cupones");
@@ -39,7 +38,7 @@ return (
             <div className="form-group">
                 <label htmlFor="email">Correo electrónico</label>   
                 <input id="email" className="form-control" type="email" placeholder="Email" name="email" 
-                ref={register({required: {value: true,message: "* El correo es requerido" ,pattern: /^\S+@\S+$/i}})} />
+                ref={register({required: {value: true,message: "* Correo invalido" ,pattern: /^\S+@\S+$/i}})} />
             </div>
             <span className="text-danger text-small d-block mb-2">
                 {errors.email && errors.email.message}

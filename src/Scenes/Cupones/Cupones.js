@@ -79,18 +79,26 @@ export default function Cupones() {
                 <div>
                     <input type="submit" value="Mis cupones"  onClick={ShowFormListar}/>
                     <input type="submit" value="Comprar cupón" onClick={ShowFormComprar}/>
-                    {FormComprar? <form className="container upload border jumbotron rounded shadow p-3 mt-3 bg-white rounded" 
+
+                    {FormComprar? 
+                    
+                    <form className="container upload border jumbotron rounded shadow p-3 mt-3 bg-white rounded" 
                     onSubmit={handleSubmit(onSubmitCrearcupon)}>
+
                     <div className="form-group">
                         <label htmlFor="vincularCupon">Valor del cupón</label> 
                         <input className="form-control " type="text" placeholder="En pesos" name="value" 
                         ref={register({required: {value:true, message: "* El monto a pagar es requerido", maxLength: 80}})} />
                     </div>
+
                     <span className="text-danger text-small d-block mb-2">
                         {errors.password && errors.password.message}
                     </span>
+
                     <table className="form-group">
-                    <h2>¿El cupon es para?</h2>
+                        <h2>
+                            ¿El cupon es para?
+                        </h2>
                         <tr>
                             <td>
                                 <input className="mr-1" name="Developer" type="radio" value="Yes" onClick={HideInput}
@@ -105,7 +113,9 @@ export default function Cupones() {
                                 <label htmlFor="vincularCupon">otro</label> 
                             </td>
                         </tr>
+
                         {ValidateInput ? "" : 
+
                         <tr>
                             <td>
                             <div className="form-group"> 
@@ -119,11 +129,15 @@ export default function Cupones() {
                             </td>
                         </tr>
                         }
+
                     </table>
+
                     <div className="center">
                         <input value="Pagar cupon" type="submit" />
                     </div>
+                    
                 </form>: ""}
+
                     {FormListarCupones? 
                         <div>{DatosCupones}</div>
                         :

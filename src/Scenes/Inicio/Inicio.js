@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
-import { Header, Navbar, Body, Footer } from '../../Components';
-import { Redirect } from 'react-router-dom';
+import { Header, Navbar, Body, Footer, Construccion } from '../../Components';
 
 const inicio = () => {
 
@@ -10,13 +9,7 @@ const inicio = () => {
         }
 
     if(true)
-        return( 
-        <div className="center mt-5">
-            <h1>Sitio en construccion...</h1>
-            <input type="submit" value="Ir a Iniciar sesion" onClick={ReInicio} />
-            {alInicio? <Redirect to="/inicio-sesion" /> : ""}
-        </div>
-        )
+        return <Construccion />
 
     return(
      <div>

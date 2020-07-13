@@ -4,6 +4,7 @@ import NavbarLogin from './NavbarLogin';
 import Footer from './Footer';
 import Body from './Body';
 import UploadPDF from './UploadFile';
+import Construccion from './Construccion';
 
 export {
     Header,
@@ -11,5 +12,6 @@ export {
     Footer,
     Body,
     UploadPDF,
-    NavbarLogin
+    NavbarLogin,
+    Construccion
 }
