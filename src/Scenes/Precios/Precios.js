@@ -1,22 +1,12 @@
 import React,{useState} from 'react';
-import { Header, Navbar, Body, Footer } from '../../Components';
+import { Header, Navbar, Body, Footer, Construccion } from '../../Components';
 import { Redirect } from 'react-router-dom';
 
 const precios = () => {
 
-    const [alInicio,setAlInicio] = useState(false);
-    const ReInicio = () =>{
-        setAlInicio(true);
-    }
-    
     if(true)
-        return( 
-        <div className="center mt-5">
-            <h1>Sitio en construccion...</h1>
-            <input type="submit" value="Ir al inicio" onClick={ReInicio} />
-            {alInicio? <Redirect to="/inicio-sesion" /> : ""}
-        </div>
-        )    
+        return <Construccion />
+
 return(
     <div>
         <Header>

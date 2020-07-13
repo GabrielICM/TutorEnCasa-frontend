@@ -7,7 +7,11 @@ const navbar = () => {
         return(    
         <nav >
             <div className="row">
-                <div className="col-sm-1"></div>
+                <div className="col-sm-1">
+                    <Link to="/" className="nav-link">
+                        
+                    </Link>
+                </div>
                 <div className="col-sm-4">
                     <ul className="nav" >
                         <Link to="/" className="nav-link">
