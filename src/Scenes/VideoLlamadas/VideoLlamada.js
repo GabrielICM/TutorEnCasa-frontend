@@ -3,16 +3,14 @@ import { useSelector } from 'react-redux';
 import { Header, Body, Footer, Navbar } from '../../Components';
 import { VideoCall } from '../../Servicios/VideoCall';
 import { useForm } from 'react-hook-form';
-import { Redirect } from 'react-router-dom';
-import Typography from '@material-ui/core/Typography';
-import Rating from '@material-ui/lab/Rating';
-import Box from '@material-ui/core/Box';
+import { Redirect,Link } from 'react-router-dom';
+
 import api from '../../Servicios/Peticion';
-import { showClassStatus } from '../../util/clases';
+import HistoryStatusClassStatus, { showClassStatus } from '../../util/clases';
 
 const videoLlamada = () => {
 
-    const [value, setValue] = React.useState(1);
+    
     const [title, setTitle] = useState('Desactivar');
     const [tutorias, setTutorias] = useState([]);
     const [videoCall, set ] = useState(new VideoCall());
@@ -66,12 +64,6 @@ const videoLlamada = () => {
         });
     }
 
-    const redireccionarAClase = () => {
-       return <Redirect to="/clase"/>
-    }
-
-
-
     const listaClases = tutorias.map((clase) => {
         return (
             <div key={clase.id} className="card mt-3 mb-5">
@@ -82,11 +74,16 @@ const videoLlamada = () => {
                     <blockquote className="blockquote mb-0">
                         <p>Duracion de la clase: {clase.minutes} </p>
                         <p>Valor de la clase por hora: {clase.price_hour}</p>
-                        <p>Estado: {showClassStatus(clase.status)}</p>
+                        
                     </blockquote>
                 </div>
-
-                <input type="submit" value="Entrar a la clase" onclick={redireccionarAClase} />
+                {true
+                    ?
+                    <Link to={`/clase?id=${clase.id}`} style={{ textDecoration: 'none' }} className='btn btn-secondary'>Entrar a la clase</Link> 
+                    :
+                    ''
+                }
+                
             </div>
         );
     });
@@ -97,6 +94,7 @@ return(
         <Navbar/>
     </Header>
     <Body>
+        <div>
         <div className="container upload border jumbotron rounded shadow p-3 mb-5 bg-white rounded">
             <form className="form-group"  onSubmit={handleSubmit(crearSubmit)}>
                 <input className="form-control " type="text" name="nombre" disabled={true}  id="nombreSala" placeholder="Sala de Video"/>
@@ -106,22 +104,10 @@ return(
                 <input className="form-control" type="text" id="nombre" placeholder="Sala de Video"/>
                 <input type="submit" value="Ingresar clase" disabled={true} className="mt-1"/>
             </form>
-            <div>
-                <Box component="fieldset" mb={3} borderColor="transparent">
-                    <Typography component="legend">Rating:</Typography>
-                    <Rating
-                    name="simple-controlled"
-                    value={value}
-                    onChange={(event, newValue) => {
-                        setValue(newValue);
-                    }}
-                    />
-                </Box>
-                <div>
+            
                     <input type="submit" value="Mis Clases" onClick={listarClases} />
                 </div>
             </div>
-        </div>
         {tutorias?
                     <div>
                         {listaClases}
@@ -145,3 +131,7 @@ return(
 };
 
 export default videoLlamada;
+
+
+//clase.status == HistoryStatusClassStatus.PAY 
+//<p>Estado: {showClassStatus(clase.status)}</p>
