@@ -16,7 +16,7 @@ const routes = (props) => {
             <Route path="/video-llamadas" component={VideoLlamada}/>
             <Route path="/solicitud" component={SolicitudTutor}/>   
             <Route path="/cupones" component={Cupones}/>
-            <Route path="/VistaAdministrador" component={VistaAdministrador}/>
+            <Route path="/Validar-Tutor" component={VistaAdministrador}/>
         </Switch>     
     </Router>
     )

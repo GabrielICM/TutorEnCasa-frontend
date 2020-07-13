@@ -4,12 +4,17 @@ import { Header, Body, Footer, Navbar } from '../../Components';
 import { VideoCall } from '../../Servicios/VideoCall';
 import { useForm } from 'react-hook-form';
 import { Redirect } from 'react-router-dom';
-
-
+import Typography from '@material-ui/core/Typography';
+import Rating from '@material-ui/lab/Rating';
+import Box from '@material-ui/core/Box';
 
 const videoLlamada = () => {
 
+    const [value, setValue] = React.useState(2);
     const [title, setTitle] = useState('Desactivar');
+    const [videoCall, set ] = useState(new VideoCall());
+    const { register, handleSubmit, errors } = useForm();
+
     const botonHerramienta = () =>{
         setTitle('Activar');
     }
@@ -21,9 +26,7 @@ const videoLlamada = () => {
         console.log(store);
         return (store.token) ? store.token : undefined
     });
-    const [videoCall, set ] = useState(new VideoCall());
-
-    const { register, handleSubmit, errors } = useForm();
+    
     const crearSubmit = data => {
         console.log(data);
         videoCall.create(data.nombre, token)
@@ -32,6 +35,7 @@ const videoLlamada = () => {
                 videoCall.setOutputAudio(document.querySelector('#audioStream'));
             }).catch((e) => console.log(e));
     };
+
     const ingresarSubmit = data => {
         console.log(data);
         videoCall.join(data.nombre, token)
@@ -65,7 +69,18 @@ return(
     </div> 
     :""
     }
-        
+    <div>
+        <Box component="fieldset" mb={3} borderColor="transparent">
+        <Typography component="legend">Rating:</Typography>
+        <Rating
+          name="simple-controlled"
+          value={value}
+          onChange={(event, newValue) => {
+            setValue(newValue);
+          }}
+        />
+      </Box>
+    </div>
 </Body>
 <Footer/>
 </div>

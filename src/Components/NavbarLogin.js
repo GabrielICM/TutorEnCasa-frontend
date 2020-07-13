@@ -13,8 +13,8 @@ const navbarLogin = () => {
             <Link to="/cupones" className="nav-link">
                 <li><h6 className="link">Mis cupones</h6></li>
             </Link>  
-            <Link to="/VistaAdministrador" className="nav-link">
-                        <li><h6 className="link">Administrador</h6></li>
+            <Link to="/Validar-Tutor" className="nav-link">
+                        <li><h6 className="link">Validar tutor</h6></li>
             </Link>    
         </ul>
     </nav>

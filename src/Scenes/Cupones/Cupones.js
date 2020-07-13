@@ -40,14 +40,14 @@ export default function Cupones() {
     };
 
     const DatosCupones = cupones.map((cupon) => (
-    <div className="card">
-        <div className="card-header">
-            Quote
+    <div className="card mt-3">
+        <div className="card-header" key={cupon.code}>
+            Codigo: {cupon.code}
         </div>
         <div className="card-body">
             <blockquote className="blockquote mb-0">
-            <p key={cupon.code}>Cupon valido por {cupon.value}</p>
-                <footer className="blockquote-footer">Someone famous in <cite title="Source Title">Source Title</cite></footer>
+                <p key={cupon.code}>Cupón valido por ${cupon.value}</p>
+                    <footer className="blockquote-footer">¡Ocupa este cupón con sabiduria!</footer>
             </blockquote>
         </div>
     </div>
@@ -55,15 +55,15 @@ export default function Cupones() {
     
     const { register, handleSubmit, errors } = useForm();
     const logged = useSelector(state => state.login);
-    const token = useSelector(state => state.token)
+    const token = useSelector(state => state.token);
 
     const onSubmitCrearcupon = data => {
         api('POST','/coupon/new',data, { 'access-token': token })
             .then((Respuesta) => {
                 console.log(Respuesta)
             });
-        }
-    
+        }    
+        
     const onSubmitListarCupones = data => {
 
     };
@@ -80,10 +80,11 @@ export default function Cupones() {
             <div>
                 <div>
                     <input type="submit" value="Mis cupones"  onClick={ShowFormListar}/>
-                    <button onClick={ShowFormComprar}>Comprar Cupon</button>
-                    {FormComprar? <form className="container upload border jumbotron rounded shadow p-3 mb-5 bg-white rounded" onSubmit={handleSubmit(onSubmitCrearcupon)}>
+                    <button onClick={ShowFormComprar}>Comprar Cupón</button>
+                    {FormComprar? <form className="container upload border jumbotron rounded shadow p-3 mt-3 bg-white rounded" 
+                    onSubmit={handleSubmit(onSubmitCrearcupon)}>
                     <div className="form-group">
-                        <label htmlFor="vincularCupon">Valor del cupon</label> 
+                        <label htmlFor="vincularCupon">Valor del cupón</label> 
                         <input className="form-control " type="text" placeholder="En pesos" name="value" 
                         ref={register({required: {value:true, message: "* El monto a pagar es requerido", maxLength: 80}})} />
                     </div>
@@ -94,13 +95,15 @@ export default function Cupones() {
                     <h2>¿El cupon es para?</h2>
                         <tr>
                             <td>
-                                <input className="mr-1" name="Developer" type="radio" value="Yes" onClick={HideInput} ref={register({ required: true })}/>
-                                <label htmlFor="vincularCupon">Ti mismo</label> 
+                                <input className="mr-1" name="Developer" type="radio" value="Yes" onClick={HideInput}
+                                 ref={register({ required: true })}/>
+                                <label htmlFor="vincularCupon">Mi</label> 
                             </td>
                         </tr>
                         <tr>
                             <td className="">
-                                <input className="mr-1" id="show" name="Developer" type="radio" value="No" onClick={ShowInput} ref={register({ required: true })}/>
+                                <input className="mr-1" id="show" name="Developer" type="radio" value="No" onClick={ShowInput}
+                                 ref={register({ required: true })}/>
                                 <label htmlFor="vincularCupon">otro</label> 
                             </td>
                         </tr>
