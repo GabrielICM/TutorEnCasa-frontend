@@ -10,10 +10,11 @@ const routes = (props) => {
         <Switch>
             <Route path="/" exact component={Inicio}/>
             <Route path="/precios" component={Precios}/>
+            <Route path="/tutorias" component={Precios}/>
             <Route path="/nosotros" component={Nosotros}/>
             <Route path="/registro" component={Registro}/>
             <Route path="/inicio-sesion" component={IniciarSesion}/>  
-            <Route path="/video-llamadas" component={VideoLlamada}/>
+            <Route path="/clases" component={VideoLlamada}/>
             <Route path="/solicitud" component={SolicitudTutor}/>   
             <Route path="/cupones" component={Cupones}/>
             <Route path="/Validar-Tutor" component={VistaAdministrador}/>
