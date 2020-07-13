@@ -19,6 +19,7 @@ const onSubmit = data => {
                 type: 'SIGN_APP',
                 user: Respuesta.user,
                 token: Respuesta.token,
+                role: Respuesta.role,
                 login: true
             });
             history.push("/cupones");

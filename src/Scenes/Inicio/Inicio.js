@@ -16,7 +16,7 @@ const inicio = () => {
             <input type="submit" value="Ir a Iniciar sesion" onClick={ReInicio} />
             {alInicio? <Redirect to="/inicio-sesion" /> : ""}
         </div>
-        )    
+        )
 
     return(
      <div>
