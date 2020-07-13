@@ -101,7 +101,7 @@ return(
                 <input type="submit" value="Iniciar clase" disabled={true} className="mt-1"/>
             </form>
             <form className="form-group" onSubmit={handleSubmit(ingresarSubmit)}>
-                <input className="form-control" type="text" id="nombre" placeholder="Sala de Video"/>
+                <input className="form-control" type="text" id="nombre" disabled={true} placeholder="Sala de Video"/>
                 <input type="submit" value="Ingresar clase" disabled={true} className="mt-1"/>
             </form>
             
