@@ -72,7 +72,7 @@ const videoLlamada = () => {
                 </div>
                 <div className="card-body">
                     <blockquote className="blockquote mb-0">
-                        <p>Duracion de la clase: {clase.minutes} </p>
+                        <p>Duración de la clase: {clase.minutes} </p>
                         <p>Valor de la clase por hora: {clase.price_hour}</p>
                         
                     </blockquote>

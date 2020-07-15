@@ -1,7 +1,7 @@
 import React from 'react';
 import {useSelector} from 'react-redux';
 import {BrowserRouter as  Router, Switch, Route, useHistory} from 'react-router-dom';
-import {IniciarSesion,Inicio,Nosotros,Precios,Registro,Herramientas,VideoLlamada,SolicitudTutor,Cupones,VistaAdministrador,VistaClase} from '../Scenes/index';
+import {IniciarSesion,Inicio,Nosotros,Precios,Registro,Herramientas,VideoLlamada,SolicitudTutor,Cupones,ValidarTutor,VistaClase} from '../Scenes/index';
 
 const routes = (props) => {
 
@@ -18,7 +18,7 @@ const routes = (props) => {
             <Route path="/clase" component={VistaClase}/>
             <Route path="/solicitud" component={SolicitudTutor}/>   
             <Route path="/cupones" component={Cupones}/>
-            <Route path="/Validar-Tutor" component={VistaAdministrador}/>
+            <Route path="/Validar-Tutor" component={ValidarTutor}/>
         </Switch>     
     </Router>
     )

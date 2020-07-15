@@ -2,7 +2,7 @@ import React from 'react';
 import {useSelector} from 'react-redux';
 import {useForm} from 'react-hook-form';
 import api from '../../Servicios/Peticion';
-import { Header, Navbar, Body, Footer,UploadPDF } from '../../Components';
+import { Header, Navbar, Body, Footer} from '../../Components';
 import { Redirect } from 'react-router-dom';
 
 
@@ -48,7 +48,7 @@ export default function solicitudTutor() {
                 <div id="FormSolicitud" className="container mb-2 mt-4 center">
                     <form className="form" onSubmit={handleSubmit(formOnSubmit)} encType="multipart/form-data">
                         <div>
-                        <h1 className="h1 mt-4 mb-4">Solicitud para realizar tutorias</h1>
+                        <h1 className="h1 mt-4 mb-4">Solicitud para realizar tutorías</h1>
                         <p>Ingresa tu certificado de alumno regular en formato PDF:</p>
                             <input type="file" name="file" id="customFile" accept="application/pdf"/>
                         </div>

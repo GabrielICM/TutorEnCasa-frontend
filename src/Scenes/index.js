@@ -3,12 +3,11 @@ import Inicio from './Inicio/Inicio';
 import Nosotros from './Nosotros/Nosotros';
 import Precios from './Precios/Precios';
 import Registro from './Registro/Registro';
-import Herramientas from './Herramientas/Herramientas';
-import VideoLlamada from './VideoLlamadas/VideoLlamada';
+import VideoLlamada from './Clases/VideoLlamada';
 import SolicitudTutor from './SolicitudTutor/SolicitudTutor';
-import VistaClase from './VideoLlamadas/VistaClase';
+import VistaClase from './Clases/VistaClase';
 import Cupones from './Cupones/Cupones';
-import VistaAdministrador from './VistaAdministrador/VistaAdministrador';
+import ValidarTutor from './ValidarTutor/ValidarTutor';
 
 export{ 
     IniciarSesion,
@@ -16,10 +15,9 @@ export{
     Nosotros,
     Precios,
     Registro,
-    Herramientas,
     VideoLlamada,
     SolicitudTutor,
     Cupones,
-    VistaAdministrador,
+    ValidarTutor,
     VistaClase
 }

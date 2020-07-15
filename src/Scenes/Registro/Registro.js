@@ -5,6 +5,7 @@ import {useForm} from 'react-hook-form';
 
 import { Header, Navbar, Body, Footer } from '../../Components';
 import api from '../../Servicios/Peticion';
+import { validadorRut } from '../../Servicios/Validador';
 
 const getParams = function () {
 	let params = {};
@@ -124,7 +125,7 @@ return(
                             <div className="form-group">
                                 <label htmlFor="dni">R.U.N.</label>
                                 <input className="form-control" type="text" id="dni" placeholder="Ej: 18857113-1" name="dni" 
-                                ref={register({required: true, pattern: { value: /^[0-9]+[-|‐]{1}[0-9kK]{1}$/i, message: 'El R.U.N. es inválido' }})} />
+                                ref={register({required: true, validate: (value) => validadorRut(value) || 'El R.U.N. es inválido'})} />
                             </div>
                             <span className="text-danger text-small d-block mb-2">
                                 {errors.dni && errors.dni.message}

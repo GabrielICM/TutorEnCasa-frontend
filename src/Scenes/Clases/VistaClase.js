@@ -71,7 +71,7 @@ export default function VistaClase() {
                 {mostrarRating?
                     <div>
                     <Box component="fieldset" mb={3} borderColor="transparent">
-                        <Typography component="legend">Rating:</Typography>
+                        <Typography component="legend">Valorar:</Typography>
                         <Rating
                         name="simple-controlled"
                         value={value}

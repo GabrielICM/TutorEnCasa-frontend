@@ -18,7 +18,7 @@ const navbar = () => {
                             <li><h6 className="link">Inicio</h6></li>
                         </Link>
                         <Link to="/nosotros" className="nav-link">
-                            <li><h6 className="link">¿Quies somos?</h6></li>
+                            <li><h6 className="link">¿Quiénes somos?</h6></li>
                         </Link> 
                         <Link to="/tutorias" className="nav-link">
                             <li><h6 className="link">Tutorías</h6></li>
@@ -35,7 +35,7 @@ const navbar = () => {
                                 <li><h6 className="link">Registrarse</h6></li>
                             </Link>  
                             <Link to="/inicio-sesion" className="nav-link">
-                                <li><h6 className="link">Iniciar sesion</h6></li>
+                                <li><h6 className="link">Iniciar sesión</h6></li>
                             </Link>        
                         </ul>         
                     }          

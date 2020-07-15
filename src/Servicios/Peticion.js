@@ -8,19 +8,7 @@
 function api(metodo, path, datos, headers = {}) {
 	let options = {};
 
-	if(metodo == 'GET'){
-		const parametros = Object.keys(datos).map((nombre) => {
-			return `${nombre}=${datos[nombre]}`;
-		});
-		options = {
-			method: metodo,
-			headers: {
-				'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
-				...headers
-			}
-		};
-	}
-	else if(datos instanceof FormData) {
+	if(datos instanceof FormData) {
 		options = {
 			method: metodo,
 			body: datos,
@@ -28,17 +16,22 @@ function api(metodo, path, datos, headers = {}) {
 		};
 	}
 	else {
-		const parametros = Object.keys(datos).map((nombre) => {
-			return `${nombre}=${datos[nombre]}`;
-		});
 		options = {
 			method: metodo,
 			headers: {
 				'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
 				...headers
-			},
-			body: parametros.join('&')
+			}
 		};
+		const parametros = Object.keys(datos).map((nombre) => {
+			return `${nombre}=${datos[nombre]}`;
+		});
+		if(metodo == 'GET'){
+			path += '?' + parametros.join('&');
+		}
+		else {
+			options.body = parametros.join('&');
+		}
 	}
 
 	return fetch(`https://tutorencasa.tk/api${path}`, options)

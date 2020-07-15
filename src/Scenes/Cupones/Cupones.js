@@ -47,12 +47,12 @@ export default function Cupones() {
     const DatosCupones = cupones.map((cupon) => (
     <div className="card mt-3 mb-5">
         <div className="card-header" key={cupon.code}>
-            Codigo: {cupon.code}
+            Código: {cupon.code}
         </div>
         <div className="card-body">
             <blockquote className="blockquote mb-0">
                 <p key={cupon.code}>Cupón valido por ${cupon.value}</p>
-                    <footer className="blockquote-footer">¡Ocupa este cupón con sabiduria!</footer>
+                    <footer className="blockquote-footer">¡Ocupa este cupón con sabiduría!</footer>
             </blockquote>
         </div>
     </div>
@@ -101,20 +101,20 @@ export default function Cupones() {
 
                     <table className="form-group">
                         <h2>
-                            ¿El cupon es para?
+                            ¿El cupón es para?
                         </h2>
                         <tr>
                             <td>
-                                <input className="mr-1" name="Developer" type="radio" value="Yes" defaultChecked="true" onClick={HideInput}
-                                 ref={register({ required: {value:true, message: "* ¡debes seleccionar una!"}})}/>
-                                <label htmlFor="vincularCupon">Mi</label> 
+                                <input className="mr-1" name="Developer" type="radio" value="Yes" onClick={HideInput}
+                                    ref={register({ required: {value:true, message: "* ¡debes seleccionar una!"}})}/>
+                                <label htmlFor="vincularCupon">Uso personal</label> 
                             </td>
                         </tr>
                         <tr>
                             <td className="">
-                                <input className="mr-1" id="show" name="Developer2" type="radio" value="No" onClick={ShowInput}
-                                 ref={register({ required: {value:true, message: "* ¡Debes seleccionar una!"}})}/>
-                                <label htmlFor="vincularCupon">otro</label> 
+                                <input className="mr-1" id="show" name="Developer" type="radio" value="No" onClick={ShowInput}
+                                    ref={register({ required: {value:true, message: "* ¡Debes seleccionar una!"}})}/>
+                                <label htmlFor="vincularCupon">Regalar</label> 
                             </td>
                         </tr>
                     
