@@ -78,7 +78,7 @@ class VideoCall {
     
     join(id, token) {
         return new Promise((resolve, reject) => {
-            Api('POST', '/meeting/join', { id }, { 'access-token': token })
+            Api('POST', '/meeting/new', { id }, { 'access-token': token })
                 .then((info) => {
                     this.meetingSession = configureMeetringSession(info.Meeting, info.Attendee);
                     this.devices.audioVideo = this.meetingSession.audioVideo;

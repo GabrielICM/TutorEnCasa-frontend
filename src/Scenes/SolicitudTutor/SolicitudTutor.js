@@ -29,11 +29,14 @@ export default function solicitudTutor() {
                 .then((res) => {
                     if(res.status == 'failed') {
                         alert(res.error);
+                    }else{
+                        alert('Enviado con éxito')
+                        console.log('lalala')
                     }
                 });
         }
         else {
-            console.log('no mucho...')
+            console.log('Error al enviar...')
             return archivoAdjuntado;
         }
     }

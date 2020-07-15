@@ -11,9 +11,9 @@ return(
     <div>
         <Header>
             <Navbar/>
-         </Header>
-         <Body>Precios</Body>
-         <Footer/>
+        </Header>
+        <Body>Precios</Body>
+        <Footer/>
     </div>    
     )
 };

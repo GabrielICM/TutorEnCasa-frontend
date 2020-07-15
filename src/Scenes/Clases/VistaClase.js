@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { Header, Body, Footer, Navbar } from '../../Components';
 import { useSelector } from 'react-redux';
@@ -8,6 +8,8 @@ import { useHistory } from "react-router-dom";
 import Typography from '@material-ui/core/Typography';
 import Rating from '@material-ui/lab/Rating';
 import Box from '@material-ui/core/Box';
+import useSession from './hooks/useSession';
+import useSessionVideoTiles from './hooks/useSessionVideoTiles';
 
 const getParams = function () {
 	let params = {};
@@ -23,21 +25,49 @@ const getParams = function () {
 };
 
 export default function VistaClase() {
+    const params = getParams();
+    const logged = useSelector(state => state.login);
+
+    if(! params['id'])
+        return <Redirect to="/mis-tutorias" />
+    if(! logged)
+        return <Redirect to="/inicio-sesion" />
+
     const history = useHistory();
     const { register, handleSubmit, errors } = useForm();
-    const logged = useSelector(state => state.login);
     const token = useSelector(state => state.token);
     const [mostrarRating, setMostrarRating] = useState(false);
     const [value, setValue] = React.useState(1);
-    const params = getParams();
-    if(! params['id']) {
-        return <Redirect to="/mis-tutorias" />
-    }
-
+    const {session, sessionError} = useSession('Test', token);
+    const videoTiles = useSessionVideoTiles(session);
+    const audioRef = React.useRef(null);
     const idClase = params['id'];
 
-    if(! logged)
-    return <Redirect to="/inicio-sesion" />
+    useEffect(() => {
+        if(session) {
+            Promise.all([
+                session.audioVideo
+                    .listAudioInputDevices()
+                    .then((devices) => {
+                        if(devices.length == 0)
+                            return alert('No posees dispositivos de audio');
+                        session.audioVideo.chooseAudioInputDevice(devices[0]);
+                    }),
+                session.audioVideo
+                    .listVideoInputDevices()
+                    .then((devices) => {
+                        if(devices.length == 0)
+                            return alert('No posees dispositivos de video');
+                        session.audioVideo.chooseVideoInputDevice(devices[0]);
+                    }),
+            ])
+            .then(() => {
+                session.audioVideo.start();
+                session.audioVideo.startLocalVideoTile();
+                session.audioVideo.bindAudioElement(audioRef.current);
+            });
+        }
+    }, [session]);
 
     const terminarClase = () =>{
         const id = params['id'];
@@ -56,6 +86,7 @@ export default function VistaClase() {
         const id = params['id'];
         api('POST',`/class/${id}/rating`, { value },{ 'access-token': token })
             .then((res) => {
+                alert('¡Valoracion enviada!')
                 history.push('/mis-tutorias');
             });
     }
@@ -87,7 +118,18 @@ export default function VistaClase() {
                     ""
                 }
             </div>
-            
+            {videoTiles.map((tileState) => (
+                <video 
+                    key={tileState.tileId}
+                    onMount={(element) => {
+                        if (session && typeof tileState.tileId === "number")
+                            session.audioVideo.bindVideoElement(tileState.tileId, element);
+                        return () => session.audioVideo.unbindVideoElement(tileState.tileId);
+                    }}>
+                </video>
+            ))
+            }
+            <audio ref={audioRef} style={{ display: "none" }} />
         </Body>
         <Footer/>
         </div>

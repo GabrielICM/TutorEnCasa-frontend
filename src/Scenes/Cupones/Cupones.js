@@ -12,6 +12,7 @@ export default function Cupones() {
     const[FormComprar, setFormComprar] = useState(false);
     const[FormListarCupones, setFormListarCupones] = useState(false);
     const[cupones, setCupones] = useState([]);
+    
     const history = useHistory();
     const { register, handleSubmit, errors } = useForm();
     const logged = useSelector(state => state.login);
@@ -34,6 +35,17 @@ export default function Cupones() {
     const HideFormListar = () =>{
             setFormListarCupones(false);  
     }
+
+    const onSubmitCrearcupon = async data => {
+        return await api('POST','/coupon/new',data, { 'access-token': token })
+            .then((res) => {
+                if(res.status == 'failed') {
+                    alert(res.error);
+                } else {
+                    window.open(res.url, '_blank');
+                }
+            });
+    }    
     
     const ShowFormListar = data =>{
         api('GET','/coupon',data, {'access-token': token}).then((Respuesta) => {
@@ -57,19 +69,6 @@ export default function Cupones() {
         </div>
     </div>
     ))
-    
-    
-    const onSubmitCrearcupon = async data => {
-        return await api('POST','/coupon/new',data, { 'access-token': token })
-            .then((res) => {
-                if(res.status == 'failed') {
-                    alert(res.error);
-                } else {
-                    window.open(res.url, '_blank');
-                }
-            });
-    }    
-    
     
     if(! logged)
     return <Redirect to="/inicio-sesion" />
@@ -142,11 +141,12 @@ export default function Cupones() {
                     
                 </form>: ""}
 
-                    {FormListarCupones? 
+                    {cupones.length > 0 && FormListarCupones ? 
+
                         <div>{DatosCupones}</div>
                         :
-                         ""
-                        }       
+                        <p>No tienes cupones</p>
+                    }
                 </div>
             </div>
         </Body>

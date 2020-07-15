@@ -9,8 +9,6 @@ import api from '../../Servicios/Peticion';
 import HistoryStatusClassStatus, { showClassStatus } from '../../util/clases';
 
 const videoLlamada = () => {
-
-    
     const [title, setTitle] = useState('Desactivar');
     const [tutorias, setTutorias] = useState([]);
     const [videoCall, set ] = useState(new VideoCall());
@@ -83,7 +81,6 @@ const videoLlamada = () => {
                     :
                     ''
                 }
-                
             </div>
         );
     });
@@ -95,19 +92,19 @@ return(
     </Header>
     <Body>
         <div>
-        <div className="container upload border jumbotron rounded shadow p-3 mb-5 bg-white rounded">
-            <form className="form-group"  onSubmit={handleSubmit(crearSubmit)}>
-                <input className="form-control " type="text" name="nombre" disabled={true}  id="nombreSala" placeholder="Sala de Video"/>
-                <input type="submit" value="Iniciar clase" disabled={true} className="mt-1"/>
-            </form>
-            <form className="form-group" onSubmit={handleSubmit(ingresarSubmit)}>
-                <input className="form-control" type="text" id="nombre" disabled={true} placeholder="Sala de Video"/>
-                <input type="submit" value="Ingresar clase" disabled={true} className="mt-1"/>
-            </form>
+            <div className="container upload border jumbotron rounded shadow p-3 mb-5 bg-white rounded">
+                <form className="form-group"  onSubmit={handleSubmit(crearSubmit)}>
+                    <input className="form-control " type="text" name="nombre" disabled={true}  id="nombreSala" placeholder="Sala de Video"/>
+                    <input type="submit" value="Iniciar clase" disabled={true} className="mt-1"/>
+                </form>
+                <form className="form-group" onSubmit={handleSubmit(ingresarSubmit)}>
+                    <input className="form-control" type="text" id="nombre" disabled={true} placeholder="Sala de Video"/>
+                    <input type="submit" value="Ingresar clase" disabled={true} className="mt-1"/>
+                </form>
             
-                    <input type="submit" value="Mis Clases" onClick={listarClases} />
-                </div>
+                <input type="submit" value="Mis Clases" onClick={listarClases} />
             </div>
+        </div>
         {tutorias?
                     <div>
                         {listaClases}
@@ -121,8 +118,8 @@ return(
             <div id="tiles"></div>
             <audio id="audioStream" hidden="hidden"></audio> 
         </div> 
-        
-        :""
+        :
+        ""
         }
 </Body>
 <Footer/>
