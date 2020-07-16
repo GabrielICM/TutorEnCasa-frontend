@@ -30,6 +30,7 @@ export default function Cupones() {
     }
     const ShowFormComprar = () =>{
             setFormComprar(true);  
+            setFormListarCupones(false);
             HideFormListar(); 
     }
     const HideFormListar = () =>{
@@ -98,13 +99,13 @@ export default function Cupones() {
                         {errors.value && errors.value.message}
                     </span>
 
-                    <table className="form-group">
+                    <table className="form-group" style={{width:"100%"}}>
                         <h2>
                             ¿El cupón es para?
                         </h2>
                         <tr>
                             <td>
-                                <input className="mr-1" name="Developer" type="radio" value="Yes" onClick={HideInput}
+                                <input className="mr-1" name="Developer" type="radio" value="Yes"  onchange={HideInput}
                                     ref={register({ required: {value:true, message: "* ¡debes seleccionar una!"}})}/>
                                 <label htmlFor="vincularCupon">Uso personal</label> 
                             </td>
@@ -119,12 +120,12 @@ export default function Cupones() {
                     
                         {ValidateInput ? "" : 
 
-                        <tr>
+                        <tr className="fluid">
                             <td>
                             <div className="form-group"> 
                                 <label htmlFor="vincularCupon">Correo electrónico</label>   
                                 <input id="email" className="form-control " type="email" placeholder="Email" name="to" 
-                                ref={register({required: {value: true,message: "* El correo es requerido" ,pattern: /^\S+@\S+$/i}})} />
+                                ref={register({required: {value: true,message: "* Correo invalido" ,pattern: /^\S+@\S+$/i}})} />
                             </div>
                             <span className="text-danger text-small d-block mb-2">
                                 {errors.email && errors.email.message}
@@ -141,11 +142,15 @@ export default function Cupones() {
                     
                 </form>: ""}
 
-                    {cupones.length > 0 && FormListarCupones ? 
+                    {cupones.length > 0 && FormListarCupones? 
 
                         <div>{DatosCupones}</div>
                         :
+                        (FormListarCupones?
                         <p>No tienes cupones</p>
+                        :
+                        ""
+                        )
                     }
                 </div>
             </div>

@@ -73,7 +73,8 @@ return(
                                 <div className="form-group">
                                     <label htmlFor="firstname">Nombre</label>
                                     <input className="form-control" type="text" placeholder="Nombre" name="firstname" id="firstname" 
-                                    ref={register({required: true,minLength: 6, maxLength: 20, pattern: { value: /^[a-z]+/i, message:"* Nombre inválido" }})} />
+                                    ref={register({required: true,minLength: 6, maxLength: 20, pattern: { value: /^[a-z]+/i,
+                                    message:"* Nombre inválido" }})} />
                                 </div>
                                 <span className="text-danger text-small d-block mb-2">
                                     {errors.firstname && errors.firstname.message}
@@ -81,7 +82,8 @@ return(
                                 <div className="form-group">
                                     <label htmlFor="lastname">Apellido</label>
                                     <input className="form-control" type="text" placeholder="lastname" name="lastname" 
-                                    ref={register({required: true,minLength: 6, maxLength: 20, pattern: { value: /^[a-z]+/i, message:"* Apellido inválido" }})} />
+                                    ref={register({required: true,minLength: 6, maxLength: 20, pattern: { value: /^[a-z]+/i,
+                                    message:"* Apellido inválido" }})} />
                                 </div>
                                 <span className="text-danger text-small d-block mb-2">
                                     {errors.lastname && errors.lastname.message}
@@ -98,9 +100,13 @@ return(
                         :
                         <div>
                             <div className="form-group">
+                                <h1 className="center h2">Completa tus datos</h1>
+                            </div>
+                            <div className="form-group">
                                 <label htmlFor="email">Correo electronico</label>
                                 <input className="form-control" type="text" id="email" placeholder="Email" name="email" 
-                                ref={register({required: true, pattern: { value: /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/i, message: 'Correo inválido' }})} />
+                                ref={register({required: true, pattern: { value: /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/i,
+                                message: 'Correo inválido' }})} />
                             </div>
                             <span className="text-danger text-small d-block mb-2">
                                 {errors.email && errors.email.message}
@@ -116,9 +122,9 @@ return(
                             <div className="form-group">
                                 <label htmlFor="repetirContraseña">Repetir Contraseña</label>
                                 <input className="form-control" type="password" id="repetirContraseña" placeholder="Repetir contraseña" name="password2" 
-                                ref={register({ validate: (value) => watch('password') === value || '* Las contraseñas no coinciden', required: true })} />
+                                ref={register({ validate: (value) => watch('password') === value || '* Las contraseñas no coinciden',
+                                required: true })} />
                             </div>
-
                             <span className="text-danger text-small d-block mb-2">
                                 {errors.password2 && errors.password2.message}
                             </span>

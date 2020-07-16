@@ -1,10 +1,7 @@
 import React, { useState } from 'react';
-import { Header, Navbar, Body, Footer, Construccion } from '../../Components';
+import { Header, Navbar, Body, Footer } from '../../Components';
 
 const inicio = () => {
-
-    if(true)
-        return <Construccion />
 
     return(
      <div>

@@ -1,11 +1,8 @@
 import React,{useState} from 'react';
-import { Header, Navbar, Body, Footer, Construccion } from '../../Components';
+import { Header, Navbar, Body, Footer } from '../../Components';
 import { Redirect } from 'react-router-dom';
 
 const precios = () => {
-
-    if(true)
-        return <Construccion />
 
 return(
     <div>
