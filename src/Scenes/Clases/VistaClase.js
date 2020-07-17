@@ -12,6 +12,7 @@ import Box from '@material-ui/core/Box';
 import useSession from './hooks/useSession';
 import useSessionVideoTiles from './hooks/useSessionVideoTiles';
 import VideoTile from './VideoTile';
+import { Grid, TextField, MenuItem } from '@material-ui/core';
 
 const getParams = function () {
 	let params = {};
@@ -25,6 +26,12 @@ const getParams = function () {
 	}
 	return params;
 };
+
+const mapToSelectOption = (mediaDeviceInfo, idx) => ({
+    label: mediaDeviceInfo.label || `device ${idx + 1}`,
+    value: mediaDeviceInfo.deviceId,
+    original: mediaDeviceInfo
+});
 
 export default function VistaClase() {
     const params = getParams();
@@ -43,9 +50,23 @@ export default function VistaClase() {
     const {session, sessionError} = useSession(params['id'], token, params['init'] ? 'new' : 'join');
     const { localVideoTile, remoteVideoTiles } = useSessionVideoTiles(session);
     const audioRef = React.useRef(null);
+    const [audioInputs, setAudioInputs] = useState([]);
+    const [videoInputs, setVideoInputs] = useState([]);
 
     useEffect(() => {
         if(session) {
+            Promise.all([
+                session.audioVideo.listAudioInputDevices(),
+                session.audioVideo.listVideoInputDevices(),
+            ])
+            .then((devices) => {
+                const [ audioInputDevices, videoInputDevices ] = devices;
+                setAudioInputs(audioInputDevices.length ? audioInputDevices.map(mapToSelectOption) : []);
+                setVideoInputs(videoInputDevices.length ? videoInputDevices.map(mapToSelectOption) : []);
+                session.audioVideo.bindAudioElement(audioRef.current);
+            });
+
+            /*
             Promise.all([
                 session.audioVideo
                     .listAudioInputDevices()
@@ -67,8 +88,27 @@ export default function VistaClase() {
                 session.audioVideo.startLocalVideoTile();
                 session.audioVideo.bindAudioElement(audioRef.current);
             });
+            */
         }
     }, [session]);
+
+    const onChangeSettings = (e) => {
+        const deviceType = e.target.name;
+        const deviceId = e.target.value;
+        const device = [...videoInputs, ...audioInputs].find(d => d.value === deviceId);
+        if(device) {
+            switch(device.original.kind) {
+                case 'audioinput':
+                    session.audioVideo.chooseAudioInputDevice(device.original.deviceId);
+                    break;
+                case 'videoinput':
+                    session.audioVideo.chooseVideoInputDevice(device.original);
+                    break;
+            }
+        } else if(deviceId === 'none' && deviceType === 'microphone') {
+            session.audioVideo.chooseAudioInputDevice(null);
+        }
+    }
 
     const terminarClase = () =>{
         const id = params['id'];
@@ -156,6 +196,32 @@ export default function VistaClase() {
                 </div>
             </div>
             <audio ref={audioRef} style={{ display: "none" }} />
+            <form id='form-devices'>
+                <TextField select label='Selecciona la entrada de audio' name='microphone' onChange={onChangeSettings} fullWidth>
+                    {
+                        audioInputs.map(({label, value}) => {
+                            return <MenuItem key={value} value={value}>
+                                {label}
+                            </MenuItem>;
+                        })
+                    }
+                </TextField>
+                <TextField select label='Selecciona la entrada de video' name='camera' onChange={onChangeSettings} fullWidth>
+                    {
+                        videoInputs.map(({label, value}) => {
+                            return <MenuItem key={value} value={value}>
+                                {label}
+                            </MenuItem>;
+                        })
+                    }
+                </TextField>
+            </form>
+            <button onClick={() => {
+                session.audioVideo.start();
+                session.audioVideo.startLocalVideoTile();
+            }}>Iniciar</button>
+            <br />
+            <br />
         </Body>
         <Footer/>
         </div>

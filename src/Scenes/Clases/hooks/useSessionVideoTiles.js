@@ -6,7 +6,6 @@ const useSessionVideoTiles = (session) => {
 
     useEffect(() => {
         if (session) {
-            console.log(session);
             session.audioVideo.addObserver({
                 videoTileDidUpdate: (tile) => {
                     // only append tile, which have an attendee id are not local and are not content oriented (screen sharing)
@@ -28,9 +27,6 @@ const useSessionVideoTiles = (session) => {
                         else {
                             setLocalVideoTile(tile);
                         }
-                    }
-                    else {
-                        console.log('Nop');
                     }
                 },
                 videoTileWasRemoved: (tileId) => {
