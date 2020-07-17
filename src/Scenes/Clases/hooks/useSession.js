@@ -9,17 +9,17 @@ import {
 
 import api from '../../../Servicios/Peticion';
 
-const useSession = (meetingName, token) => {
+const useSession = (id, token, newJoin) => {
     const [error, setError] = useState(false);
     const [session, setSession] = useState(null);
 
     useEffect(() => {
-        api('POST', '/meeting/new', { id: meetingName }, { 'access-token': token })
+        api('POST', `/meeting/${newJoin}`, { id }, { 'access-token': token })
         .then((info) => {
-            const logger = new ConsoleLogger("ChimeMeetingLogs", LogLevel.INFO);
+            const logger = new ConsoleLogger("ChimeMeetingLogs", LogLevel.ERROR);
             const config = new MeetingSessionConfiguration(
-                info.Meeting,
-                info.Attendee
+                info.joinInfo.Meeting,
+                info.joinInfo.Attendee
             );
 
             const controller = new DefaultDeviceController(logger);
@@ -33,7 +33,7 @@ const useSession = (meetingName, token) => {
             setSession(meetingSession);
         })
         .catch(() => setError(true));
-    }, [meetingName, token]);
+    }, [id, token, newJoin]);
 
     return { session, error };
 };

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import './VistaClase.css';
 import { useForm } from 'react-hook-form';
 import { Header, Body, Footer, Navbar } from '../../Components';
 import { useSelector } from 'react-redux';
@@ -10,6 +11,7 @@ import Rating from '@material-ui/lab/Rating';
 import Box from '@material-ui/core/Box';
 import useSession from './hooks/useSession';
 import useSessionVideoTiles from './hooks/useSessionVideoTiles';
+import VideoTile from './VideoTile';
 
 const getParams = function () {
 	let params = {};
@@ -38,10 +40,9 @@ export default function VistaClase() {
     const token = useSelector(state => state.token);
     const [mostrarRating, setMostrarRating] = useState(false);
     const [value, setValue] = React.useState(1);
-    const {session, sessionError} = useSession('Test', token);
-    const videoTiles = useSessionVideoTiles(session);
+    const {session, sessionError} = useSession(params['id'], token, params['init'] ? 'new' : 'join');
+    const { localVideoTile, remoteVideoTiles } = useSessionVideoTiles(session);
     const audioRef = React.useRef(null);
-    const idClase = params['id'];
 
     useEffect(() => {
         if(session) {
@@ -79,7 +80,6 @@ export default function VistaClase() {
                 alert(res.errors)
             }   
         });
-
     }
 
     const ratingClase = (value) =>{
@@ -118,17 +118,43 @@ export default function VistaClase() {
                     ""
                 }
             </div>
-            {videoTiles.map((tileState) => (
-                <video 
-                    key={tileState.tileId}
-                    onMount={(element) => {
-                        if (session && typeof tileState.tileId === "number")
-                            session.audioVideo.bindVideoElement(tileState.tileId, element);
-                        return () => session.audioVideo.unbindVideoElement(tileState.tileId);
-                    }}>
-                </video>
-            ))
-            }
+            <div id="videoCall">
+                <div className="contact-name">
+                    <h3>Partner Name</h3>
+                </div>
+                <div className="remote-stream">
+                    {remoteVideoTiles.map((tileState) => (
+                        <VideoTile 
+                            key={tileState.tileId}
+                            onMount={(element) => {
+                                if (session && typeof tileState.tileId === "number")
+                                    session.audioVideo.bindVideoElement(tileState.tileId, element);
+                                return () => session.audioVideo.unbindVideoElement(tileState.tileId);
+                            }}
+                        />
+                    ))
+                    }
+                </div>
+                <div className="local-stream">
+                    {localVideoTile ?
+                        <VideoTile 
+                            key={localVideoTile.tileId}
+                            onMount={(element) => {
+                                if (session && typeof localVideoTile.tileId === "number")
+                                    session.audioVideo.bindVideoElement(localVideoTile.tileId, element);
+                                return () => session.audioVideo.unbindVideoElement(localVideoTile.tileId);
+                            }}
+                        />
+                        :
+                        ''
+                    }
+                </div>
+                <div className="controls">
+                    <button className="call-end">
+                        <i className="material-icons md-48">call_end</i>
+                    </button>
+                </div>
+            </div>
             <audio ref={audioRef} style={{ display: "none" }} />
         </Body>
         <Footer/>

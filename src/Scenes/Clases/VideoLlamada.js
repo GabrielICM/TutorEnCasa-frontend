@@ -7,22 +7,24 @@ import { Redirect,Link } from 'react-router-dom';
 
 import api from '../../Servicios/Peticion';
 import HistoryStatusClassStatus, { showClassStatus } from '../../util/clases';
+import { RolUsuario } from '../../util/usuario';
 
 const videoLlamada = () => {
+    const logged = useSelector(state => state.login);
+    if(! logged)
+        return <Redirect to="/inicio-sesion"/>
+
     const [title, setTitle] = useState('Desactivar');
     const [tutorias, setTutorias] = useState([]);
     const [videoCall, set ] = useState(new VideoCall());
     const [showTutorias, setShowTutorias ] = useState(false);
-
+    const roles = useSelector(state => state.user.roles);
     const { register, handleSubmit, errors } = useForm();
 
     const botonHerramienta = () =>{
         setTitle('Activar');
     }
-    const logged = useSelector(state => state.login);
-    if(! logged)
-        return <Redirect to="/inicio-sesion"/>
-
+    
     const token = useSelector(store => {
         return (store.token) ? store.token : undefined
     });
@@ -75,11 +77,11 @@ const videoLlamada = () => {
                         
                     </blockquote>
                 </div>
-                {true
+                <Link to={`/clase?id=${clase.id}&init`} style={{ textDecoration: 'none' }} className='btn btn-secondary'>Iniciar clase</Link> 
+                <Link to={`/clase?id=${clase.id}`} style={{ textDecoration: 'none' }} className='btn btn-secondary'>Entrar a la clase</Link> 
+                {/*roles.includes(RolUsuario.TUTOR)
                     ?
-                    <Link to={`/clase?id=${clase.id}`} style={{ textDecoration: 'none' }} className='btn btn-secondary'>Entrar a la clase</Link> 
-                    :
-                    ''
+                    :*/
                 }
             </div>
         );
@@ -106,20 +108,11 @@ return(
             </div>
         </div>
         {tutorias?
-                    <div>
-                        {listaClases}
-                    </div>
-                    :
-                    ""    
-                }
-        {false?
-        <div>
-            <button onClick={botonHerramienta}>{title}</button>
-            <div id="tiles"></div>
-            <audio id="audioStream" hidden="hidden"></audio> 
-        </div> 
-        :
-        ""
+            <div>
+                {listaClases}
+            </div>
+            :
+            ""
         }
 </Body>
 <Footer/>
