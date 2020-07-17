@@ -4,16 +4,18 @@ import { Header, Body, Footer, Navbar } from '../../Components';
 import { useSelector } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import api from '../../Servicios/Peticion';
-import { useHistory } from "react-router-dom";
+import Popup from "reactjs-popup";
 
 export default function Cupones() {
 
     const[ValidateInput, setValidateInput] = useState(true);
     const[FormComprar, setFormComprar] = useState(false);
     const[FormListarCupones, setFormListarCupones] = useState(false);
+    const [text,setText] = useState();
+    const [alertShow,setAlertShow] = useState(false);
+    const [alertdesign,setAlertdesign] = useState(true);
     const[cupones, setCupones] = useState([]);
     
-    const history = useHistory();
     const { register, handleSubmit, errors } = useForm();
     const logged = useSelector(state => state.login);
     const token = useSelector(state => state.token);
@@ -38,12 +40,14 @@ export default function Cupones() {
     }
 
     const onSubmitCrearcupon = async data => {
-        return await api('POST','/coupon/new',data, { 'access-token': token })
+        return await api('POST','/coupon/new',{value: data.value}, { 'access-token': token })
             .then((res) => {
                 if(res.status == 'failed') {
-                    alert(res.error);
+                    setText((res.error).toString());
+                    setAlertdesign(false);
                 } else {
                     window.open(res.url, '_blank');
+                    setText('Cupon creado correctamente');
                 }
             });
     }    
@@ -105,7 +109,7 @@ export default function Cupones() {
                         </h2>
                         <tr>
                             <td>
-                                <input className="mr-1" name="Developer" type="radio" value="Yes"  onchange={HideInput}
+                                <input className="mr-1" name="Developer" type="radio" value="Yes"  onChange={HideInput}
                                     ref={register({ required: {value:true, message: "* ¡debes seleccionar una!"}})}/>
                                 <label htmlFor="vincularCupon">Uso personal</label> 
                             </td>
@@ -139,7 +143,22 @@ export default function Cupones() {
                     <div className="center">
                         <input value="Pagar cupon" type="submit" />
                     </div>
-                    
+                    <Popup
+                        modal
+                        open={alertShow}
+                        closeOnDocumentClick
+                        onClose={()=>{setAlertShow(false)}}
+                        >
+                        {alertdesign?
+                        <div className="alert alert-success" role="alert">
+                            <h1>{text}</h1>
+                        </div>
+                        :
+                        <div className="alert alert-danger" role="alert">
+                            <h1>{text}</h1>
+                        </div>
+                        }
+                    </Popup>
                 </form>: ""}
 
                     {cupones.length > 0 && FormListarCupones? 
@@ -147,7 +166,7 @@ export default function Cupones() {
                         <div>{DatosCupones}</div>
                         :
                         (FormListarCupones?
-                        <p>No tienes cupones</p>
+                        <p className="center">No tienes cupones</p>
                         :
                         ""
                         )

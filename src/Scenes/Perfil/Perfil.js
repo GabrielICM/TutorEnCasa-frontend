@@ -2,7 +2,7 @@ import React,{useState} from 'react';
 import { Header, Navbar, Body, Footer } from '../../Components';
 import {useSelector} from 'react-redux';
 import {useForm} from 'react-hook-form';
-import Popup from "reactjs-popup";
+import { Redirect } from 'react-router-dom';
 
 const perfil = () => {
 
@@ -19,6 +19,8 @@ const perfil = () => {
 
     }
 
+    if(! logged)
+        return <Redirect to="/inicio-sesion" />
 return(
     <div>
         <Header>
@@ -28,14 +30,11 @@ return(
             <div className="container upload border jumbotron rounded shadow p-3 mt-3 bg-white rounded" style={{width:"50%"}}>
                 <div className="form-group">
                     <h1 className="h3"> Datos personales</h1>
-                    <p className="form-control">Nombre: {user.firstname}</p>
-                    <p className="form-control">Apellido: {user.lastname}</p>
-                    <p className="form-control"> Email: {user.email}</p>
-                    <p className="form-control"> contraseña: **********</p>
                     
-                    <Popup trigger={<button> Trigger</button>} position="right center">
-                        <div>Popup content here !!</div>
-                    </Popup>
+                    <input type="text" className="form-control mb-1 mt-1" disabled={true} value={`Nombre: ${user.firstname}`}/>
+                    <input type="text" className="form-control mb-1 mt-1" disabled={true} value={`Apellido: ${user.lastname}`}/>
+                    <input type="text" className="form-control mb-1 mt-1" disabled={true} value={`Correo electrónico: ${user.email}`}/>
+                    <input type="text" className="form-control mb-1 mt-1" disabled={true} value="Contraseña: ***********"/>
                     
                     <div>
                     {true?

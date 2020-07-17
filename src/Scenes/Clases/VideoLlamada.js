@@ -57,7 +57,7 @@ const videoLlamada = () => {
                 setShowTutorias(true);
             }
             else{
-                alert(res.errors)
+                alert(res.error)
             }
         });
     }

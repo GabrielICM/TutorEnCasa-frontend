@@ -1,16 +1,21 @@
-import React from 'react';
+import React,{useState} from 'react';
 import {useSelector} from 'react-redux';
 import {useForm} from 'react-hook-form';
 import api from '../../Servicios/Peticion';
-import { Header, Navbar, Body, Footer} from '../../Components';
+import { Header, Navbar, Body, Footer,Alerts} from '../../Components';
 import { Redirect } from 'react-router-dom';
-
+import {Modal} from 'react-bootstrap';
 
 export default function solicitudTutor() {
     const logged = useSelector(state => state.login);
-    const { register, handleSubmit, errors } = useForm();
     const token = useSelector(state => state.token);
+    const { register, handleSubmit, errors } = useForm();
+    
     let archivoAdjuntado = true;
+
+    const [text,setText] = useState();
+    const [alertShow,setAlertShow] = useState(false);
+    const [alertdesign,setAlertdesign] = useState(true);
 
     if(! logged)
         return <Redirect to="/inicio-sesion" />
@@ -28,15 +33,21 @@ export default function solicitudTutor() {
             api('POST','/tutor/request', formData, { 'access-token': token })
                 .then((res) => {
                     if(res.status == 'failed') {
-                        alert(res.error);
-                    }else{
-                        alert('Enviado con éxito')
-                        console.log('lalala')
+                        setText((res.error).toString());
+                        setAlertdesign(false);
                     }
+                    else{
+                        setText('Enviado con éxito');
+                    }
+                    setAlertShow(true);
                 });
+                
         }
         else {
             console.log('Error al enviar...')
+            setText('Debe ingresar un documento')
+            setAlertdesign(false);
+            setAlertShow(true);
             return archivoAdjuntado;
         }
     }
@@ -57,7 +68,16 @@ export default function solicitudTutor() {
                         </div>
                         <div className="mb-2 mt-4 center">
                             <input type="submit" value="Enviar solicitud" name="sbtSolicitud" 
-                            ref={register({required: {value:archivoAdjuntado, message: "Debe adjuntar un archivo pdf"}})} />
+                            ref={register({required: {value:archivoAdjuntado, message: "Debe adjuntar un archivo pdf"}})}/>
+                        <div>
+                            <Modal show={alertShow} onHide={() => {setAlertShow(false)}}>
+                                <Modal.Header closeButton>
+                                    <div className="center">
+                                        {text}
+                                    </div>
+                                </Modal.Header> 
+                            </Modal>
+                        </div>    
                         </div>
                         <span className="text-danger text-small d-block mb-2">
                             {errors.sbtSolicitud && errors.sbtSolicitud.message}
@@ -69,3 +89,22 @@ export default function solicitudTutor() {
     </div>
     ) 
 };
+
+/*
+<Popup
+                                modal
+                                open={alertShow}
+                                closeOnDocumentClick
+                                onClose={()=>{setAlertShow(false)}}
+                                >
+                                {alertdesign?
+                                <div className="alert alert-success" style={{width:"100%",height:"100%"}} role="alert">
+                                    <h1>{text}</h1>
+                                </div>
+                                :
+                                <div className="alert alert-danger" role="alert">
+                                    <h1>{text}</h1>
+                                </div>
+                                }
+                            </Popup>
+*/
