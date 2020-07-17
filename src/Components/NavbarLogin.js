@@ -29,7 +29,8 @@ const navbarLogin = () => {
             {esAdmin?
             <Link to="/Validar-Tutor" className="nav-link">
                 <li><h6 className="link">Validar tutor</h6></li>
-            </Link> :
+            </Link> 
+            :
             ""}
         </ul>
     </nav>

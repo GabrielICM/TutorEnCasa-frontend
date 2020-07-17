@@ -9,20 +9,26 @@ const inicio = () => {
             <Navbar/>
          </Header>
         <Body>
-        <div id="carouselExampleControls" className="carousel slide container pt-4 " data-ride="carousel">
+
+        <div id="carouselExampleControls" className="carousel slide container pt-1 center " data-ride="carousel">
+            <ol className="carousel-indicators">
+                <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+                <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+                <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+            </ol>
             <div className="carousel-inner">
                 <div className="carousel-item active">
-                <img className="d-block w-100" src={"/public/Images/imagen.jpg"} alt="First slide"></img>
+                    <img className="d-block w-100 "  src={"/public/Images/inicio.jpg"} alt="First slide"></img>
                 </div>
                 <div className="carousel-item">
-                <img className="d-block w-100" src={"/public/Images/imagen.jpg"} alt="Second slide"></img>
+                    <img className="d-block w-100"  src={"/public/Images/inicio.jpg"} alt="Second slide"></img>
                 </div>
                 <div className="carousel-item">
-                <img className="d-block w-100" src={"/public/Images/imagen.jpg"} alt="Third slide"></img>
+                    <img className="d-block w-100"  src={"/public/Images/inicio.jpg"} alt="Third slide"></img>
                 </div>
             </div>
             <a className="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
-                <span className="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span className="carousel-control-prev-icon" aria-hidden="false"></span>
                 <span className="sr-only">Previous</span>
             </a>
             <a className="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
@@ -30,6 +36,35 @@ const inicio = () => {
                 <span className="sr-only">Next</span>
             </a>
         </div>
+        <div className="row mt-3 mb-5">
+            <div className="horizontal-line col"></div>
+        </div>
+        <div className="row">
+            <div className="col">
+                <h1 className="h3 center"> ¿Quieres ser tutor?</h1>
+                <p className="pText">
+                Lorem ipsum dolor sit amet consectetur adipiscing elit aenean dapibus, tortor diam laoreet sem leo volutpat luctus 
+                gravida condimentum parturient, at morbi ridiculus nisl porttitor fringilla penatibus sociosqu. Placerat inceptos 
+                congue metus varius maecenas eleifend suscipit tempor elementum neque, tincidunt semper auctor lacinia ac egestas 
+                diam massa commodo volutpat dictum, dictumst sociosqu ut duis magnis nisl torquent feugiat gravida. Nunc neque 
+                accumsan mus cras ante nibh hendrerit vulputate sociis lobortis tempus, pretium nam libero fringilla vitae 
+                malesuada elementum arcu suscipit.
+                </p>
+            </div>
+            <div className="vertical-line"></div>
+            <div className="col awayFooter">
+            <h1 className="h3 center"> ¿Quieres ser tutor?</h1>
+            <p className="pText">
+                Lorem ipsum dolor sit amet consectetur adipiscing elit aenean dapibus, tortor diam laoreet sem leo volutpat luctus 
+                gravida condimentum parturient, at morbi ridiculus nisl porttitor fringilla penatibus sociosqu. Placerat inceptos 
+                congue metus varius maecenas eleifend suscipit tempor elementum neque, tincidunt semper auctor lacinia ac egestas 
+                diam massa commodo volutpat dictum, dictumst sociosqu ut duis magnis nisl torquent feugiat gravida. Nunc neque 
+                accumsan mus cras ante nibh hendrerit vulputate sociis lobortis tempus, pretium nam libero fringilla vitae 
+                malesuada elementum arcu suscipit.
+                </p>
+            </div>
+        </div>
+
         </Body>
         <Footer/>
      </div>   

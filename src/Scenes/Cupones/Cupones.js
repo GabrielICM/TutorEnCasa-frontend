@@ -40,14 +40,19 @@ export default function Cupones() {
     }
 
     const onSubmitCrearcupon = async data => {
-        return await api('POST','/coupon/new',{value: data.value}, { 'access-token': token })
+
+        return await api('POST','/coupon/new', data, { 'access-token': token })
             .then((res) => {
                 if(res.status == 'failed') {
                     setText((res.error).toString());
                     setAlertdesign(false);
                 } else {
                     window.open(res.url, '_blank');
-                    setText('Cupon creado correctamente');
+                    if(data.email){
+                        setText('Cupon creado correctamente');
+                    }else{
+                        setText('Cupon regalado correctamente');
+                    }
                 }
                 setAlertShow(true);
             });
