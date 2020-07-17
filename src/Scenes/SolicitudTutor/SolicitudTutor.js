@@ -41,7 +41,6 @@ export default function solicitudTutor() {
                     }
                     setAlertShow(true);
                 });
-                
         }
         else {
             console.log('Error al enviar...')
@@ -67,12 +66,12 @@ export default function solicitudTutor() {
                             <input type="file" name="file" id="customFile" accept="application/pdf"/>
                         </div>
                         <div className="mb-2 mt-4 center">
-                            <input type="submit" value="Enviar solicitud" name="sbtSolicitud" 
+                            <input className="btn btn-secondary" type="submit" value="Enviar solicitud" name="sbtSolicitud" 
                             ref={register({required: {value:archivoAdjuntado, message: "Debe adjuntar un archivo pdf"}})}/>
                         <div>
                             <Modal show={alertShow} onHide={() => {setAlertShow(false)}}>
                                 <Modal.Header closeButton>
-                                    <div className="center">
+                                    <div>
                                         {text}
                                     </div>
                                 </Modal.Header> 

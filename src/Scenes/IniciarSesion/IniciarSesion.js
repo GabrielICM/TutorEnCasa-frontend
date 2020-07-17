@@ -51,8 +51,8 @@ return (
             <span className="text-danger text-small d-block mb-2">
                 {errors.password && errors.password.message}
             </span>
-            <div className="mb-2 mt-4 center">
-                <input type="submit" value="Iniciar sesion"/>
+            <div className="mb-2 mt-4 center" >
+                <input className="btn btn-secondary" type="submit" value="Iniciar sesion" />
             </div>
     </form>
     </Body>

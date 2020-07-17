@@ -2,7 +2,7 @@ import React,{useState} from 'react';
 import { useSelector } from 'react-redux';
 import { Redirect, Link } from 'react-router-dom';
 import {useForm} from 'react-hook-form';
-
+import {Modal} from 'react-bootstrap';
 import { Header, Navbar, Body, Footer } from '../../Components';
 import api from '../../Servicios/Peticion';
 import { validadorRut } from '../../Servicios/Validador';
@@ -26,7 +26,11 @@ const registro = () => {
         reValidateMode: 'onChange'
     });
     const token = useSelector(state => state.token);
+
     const [validarCuenta, setValidarCuenta] = useState(false);
+    const [alertShow,setAlertShow] = useState(false);
+    const [alertdesign,setAlertdesign] = useState(true);
+    const [text,setText] = useState();
     const params = getParams();
     
     const onSubmit = data => {
@@ -43,7 +47,7 @@ const registro = () => {
         api('POST', `/register/${step}`, data, { 'access-token': token })
             .then((res) => {
                 if(res.status == 'failed') {
-                    alert(res.error);
+                    setText((res.error).toString());
                 }
                 else {
                     setValidarCuenta((params.paso && params.run) ? false : true);
@@ -64,8 +68,7 @@ return(
         </Header>
         <Body>
             <div>
-                <form className="container upload border jumbotron rounded shadow p-3 mb-5 bg-white rounded"  onSubmit={handleSubmit(onSubmit)}>
-                    
+                <form className="container upload border jumbotron rounded shadow p-3 mb-5 bg-white rounded"  onSubmit={handleSubmit(onSubmit)}>              
                     {
                         params.paso
                         ?
@@ -138,8 +141,8 @@ return(
                             </span>
                         </div>
                     }
-                    <div className="center">
-                        <input type="submit" value="Registro"/>
+                    <div className="center" variant="secondary">
+                        <input className="btn btn-secondary" type="submit" value="Registro"/>
                     </div>
                     <div>
                         {

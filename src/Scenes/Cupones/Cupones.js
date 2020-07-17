@@ -4,7 +4,7 @@ import { Header, Body, Footer, Navbar } from '../../Components';
 import { useSelector } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import api from '../../Servicios/Peticion';
-import Popup from "reactjs-popup";
+import {Modal} from 'react-bootstrap';
 
 export default function Cupones() {
 
@@ -49,6 +49,7 @@ export default function Cupones() {
                     window.open(res.url, '_blank');
                     setText('Cupon creado correctamente');
                 }
+                setAlertShow(true);
             });
     }    
     
@@ -141,28 +142,18 @@ export default function Cupones() {
                     </table>
 
                     <div className="center">
-                        <input value="Pagar cupon" type="submit" />
+                        <input className="btn btn-secondary" value="Pagar cupon" type="submit" />
                     </div>
-                    <Popup
-                        modal
-                        open={alertShow}
-                        closeOnDocumentClick
-                        onClose={()=>{setAlertShow(false)}}
-                        >
-                        {alertdesign?
-                        <div className="alert alert-success" role="alert">
-                            <h1>{text}</h1>
-                        </div>
-                        :
-                        <div className="alert alert-danger" role="alert">
-                            <h1>{text}</h1>
-                        </div>
-                        }
-                    </Popup>
+                    <Modal show={alertShow} onHide={() => {setAlertShow(false)}}>
+                        <Modal.Header closeButton>
+                            <div>
+                                {text}
+                            </div>
+                        </Modal.Header> 
+                    </Modal>
                 </form>: ""}
 
-                    {cupones.length > 0 && FormListarCupones? 
-
+                    {cupones.length > 0 && FormListarCupones?
                         <div>{DatosCupones}</div>
                         :
                         (FormListarCupones?

@@ -63,14 +63,14 @@ const VistaAdministrador = () => {
                     <p className="card-text">Email: {solicitud.user.email}</p>
                 </div>
                 <ul className="list-group list-group-flush">
-                    <li className="list-group-item">
-                        <input type="submit" value="Certificado" onClick={() => apiPeticioncertificado(solicitud.id)} />
+                    <li className="list-group-item" style={{width:"100%"}}>
+                        <input className="btn btn-info" type="submit" value="Certificado" onClick={() => apiPeticioncertificado(solicitud.id)} />
                     </li>
                     <li className="list-group-item">
-                        <input type="submit" value="Aceptar" onClick={() =>apiValidarTutor(1, solicitud.id)} />   
+                        <input className="btn btn-success" style={{width:"100%"}} type="submit" value="Aceptar" onClick={() =>apiValidarTutor(1, solicitud.id)} />   
                     </li>
                     <li className="list-group-item">
-                        <input type="submit"value="Rechazar" onClick={()=> apiValidarTutor(0, solicitud.id)} />
+                        <input className="btn btn-danger" style={{width:"100%"}} type="submit"value="Rechazar" onClick={()=> apiValidarTutor(0, solicitud.id)} />
                     </li>
                 </ul>
             </div>
