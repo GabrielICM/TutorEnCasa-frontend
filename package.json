@@ -21,12 +21,25 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "brunch build -p",
+    "build": "react-scripts build --debug",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
   },
   "homepage": "https://tutorencasa.tk/public",
-  "devDependencies": {
-    "terser-brunch": "^4.0.0"
+  "devDependencies": {},
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not op_mini all",
+      "not ie <= 11"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
   }
 }
