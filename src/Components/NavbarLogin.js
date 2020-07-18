@@ -2,12 +2,18 @@ import React, { useState } from 'react';
 import {Link} from 'react-router-dom';
 import {useSelector} from 'react-redux'; 
 import { RolUsuario } from '../util/usuario';
+import { Input } from '@material-ui/core';
 
 
 const navbarLogin = () => {
     const roles = useSelector(state => state.user ? state.user.roles : []);
     const [esAdmin] = useState(() => roles.includes(RolUsuario.ADMINISTRADOR));
     const [esTutor] = useState(() => roles.includes(RolUsuario.TUTOR));
+
+    function refreshPage() {
+        window.location.reload(false);
+      }
+
     return  (
     <nav >
         <ul className="nav">
@@ -29,9 +35,12 @@ const navbarLogin = () => {
             {esAdmin?
             <Link to="/Validar-Tutor" className="nav-link">
                 <li><h6 className="link">Validar tutor</h6></li>
-            </Link> 
+            </Link>        
             :
             ""}
+            <li>
+                <Input type="button" className="link" on onClick={refreshPage} value="salir"/>
+            </li>    
         </ul>
     </nav>
     )

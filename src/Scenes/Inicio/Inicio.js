@@ -9,7 +9,6 @@ const inicio = () => {
             <Navbar/>
          </Header>
         <Body>
-
         <div id="carouselExampleControls" className="carousel slide container pt-1 center " data-ride="carousel">
             <ol className="carousel-indicators">
                 <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>

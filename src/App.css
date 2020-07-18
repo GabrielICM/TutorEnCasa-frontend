@@ -2,6 +2,14 @@
     text-align: center;
 }
 
+.noMargin{
+  margin: unset;
+}
+
+.noPadding{
+  padding: unset;
+}
+
 .footer {
     position: fixed;
     bottom: 0;

@@ -4,7 +4,6 @@ import {BrowserRouter as  Router, Switch, Route, useHistory} from 'react-router-
 import {IniciarSesion,Inicio,Nosotros,Tutorias,Registro,VideoLlamada,SolicitudTutor,Cupones,ValidarTutor,VistaClase,Perfil} from '../Scenes/index';
 
 const routes = (props) => {
-
     return(
     <Router basename="/public">
         <Switch>

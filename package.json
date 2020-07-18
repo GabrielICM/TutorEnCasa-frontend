@@ -17,14 +17,16 @@
     "react-redux": "^7.2.0",
     "react-router-dom": "^5.2.0",
     "react-scripts": "1.1.5",
-    "reactjs-popup": "^1.5.0",
     "redux": "^4.0.5"
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
+    "build": "brunch build -p",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
   },
-  "homepage": "https://tutorencasa.tk/public"
+  "homepage": "https://tutorencasa.tk/public",
+  "devDependencies": {
+    "terser-brunch": "^4.0.0"
+  }
 }

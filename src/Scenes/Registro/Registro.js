@@ -29,7 +29,7 @@ const registro = () => {
 
     const [validarCuenta, setValidarCuenta] = useState(false);
     const [alertShow,setAlertShow] = useState(false);
-    const [alertdesign,setAlertdesign] = useState(true);
+    const [alertShowRegister,setAlertShowRegister] = useState(false);
     const [text,setText] = useState();
     const params = getParams();
     
@@ -48,9 +48,14 @@ const registro = () => {
             .then((res) => {
                 if(res.status == 'failed') {
                     setText((res.error).toString());
+                    setAlertShow(true);
                 }
                 else {
                     setValidarCuenta((params.paso && params.run) ? false : true);
+                    setAlertShowRegister(true);
+                    if(step==2){
+                        setText('Registro completado');
+                    }
                 }
             });
     }
@@ -148,16 +153,34 @@ return(
                         {
                             validarCuenta
                             ?
-                            <Link 
-                                to={'https://tutorencasa.awsapps.com/mail'} 
-                                target="_blank" 
-                                onClick={(event) => {event.preventDefault(); window.open('https://tutorencasa.awsapps.com/mail');}}>
-                                Valida tu cuenta aquí
-                            </Link>
+                            <Modal show={alertShowRegister} onHide={() => {setAlertShowRegister(false)}}>
+                                <Modal.Header closeButton>
+                                    <div>
+                                        Valida tu registro
+                                    </div>
+                                </Modal.Header> 
+                                <Modal.Body>
+                                <Link 
+                                    to={'https://tutorencasa.awsapps.com/mail'} 
+                                    target="_blank" 
+                                    onClick={(event) => {event.preventDefault(); window.open('https://tutorencasa.awsapps.com/mail');}}>
+                                    
+                                    Valida tu cuenta aquí
+                                </Link>
+                                </Modal.Body>
+                            </Modal>
+                            
                             : 
                             ''
                         }
                     </div>
+                    <Modal show={alertShow} onHide={() => {setAlertShow(false)}}>
+                        <Modal.Header closeButton>
+                            <div>
+                                {text}
+                            </div>
+                        </Modal.Header> 
+                    </Modal>
                 </form>
             </div>
         </Body>
