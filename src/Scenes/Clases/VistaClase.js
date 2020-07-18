@@ -2,12 +2,15 @@ import React, { useState, useEffect } from 'react';
 import './VistaClase.css';
 import { Header, Body, Footer, Navbar } from '../../Components';
 import { useSelector } from 'react-redux';
-import { Redirect } from 'react-router-dom';
+import { Redirect, useHistory } from 'react-router-dom';
 import useSession from './hooks/useSession';
 import useSessionVideoTiles from './hooks/useSessionVideoTiles';
 import VideoTile from './VideoTile';
-import { TextField, MenuItem } from '@material-ui/core';
+import { TextField, MenuItem, Box } from '@material-ui/core';
 import { CallEnd } from '@material-ui/icons';
+import api from '../../Servicios/Peticion';
+import { Modal } from 'react-bootstrap';
+import Rating from '@material-ui/lab/Rating';
 
 const getParams = function () {
 	let params = {};
@@ -37,6 +40,7 @@ export default function VistaClase() {
     if(! logged)
         return <Redirect to="/inicio-sesion" />
 
+    const history = useHistory();
     const token = useSelector(state => state.token);
     const {session, sessionError} = useSession(params['id'], token, params['init'] ? 'new' : 'join');
     const { localVideoTile, remoteVideoTiles } = useSessionVideoTiles(session);
@@ -44,6 +48,32 @@ export default function VistaClase() {
     const [audioInputs, setAudioInputs] = useState([]);
     const [videoInputs, setVideoInputs] = useState([]);
     const [showVideoEl, setShowVideoEl] = useState(false);
+    const [mostrarRating, setMostrarRating] = useState(false);
+    const [ratingValue, setRatingValue] = React.useState(1);
+
+    const terminarClase = (e) => {
+        e.preventDefault();
+        const id = params['id'];
+        api('PUT',`/class/${id}/end`,{},{ 'access-token': token }).then((res)=>{
+            if(res.status == 'success'){
+                setMostrarRating(true);
+            }
+            else{
+                alert(res.errors)
+            }   
+        });
+    }
+
+    const ratingClase = (value) =>{
+        const id = params['id'];
+        api('POST',`/class/${id}/rating`, { value },{ 'access-token': token })
+            .then((res) => {
+                session.audioVideo.stopContentShare();
+                session.audioVideo.stopLocalVideoTile();
+                session.audioVideo.stop();
+                history.push('/mis-tutorias');
+            });
+    }
 
     useEffect(() => {
         if(session) {
@@ -92,6 +122,24 @@ export default function VistaClase() {
         </Header>
         <Body>
             <audio ref={audioRef} style={{ display: "none" }} />
+            <Modal show={mostrarRating} onHide={() => {setMostrarRating(false)}}>
+                <Modal.Header closeButton>Califica esta clase</Modal.Header>
+                <Modal.Body>
+                    <div style={{ textAlign: 'center' }}>
+                        <Box component="fieldset" mb={3} borderColor="transparent">
+                            <Rating
+                            name="simple-controlled"
+                            value={ratingValue}
+                            precision={1}
+                            onChange={(event, newValue) => {
+                                ratingClase(newValue);
+                                setRatingValue(newValue);
+                            }}
+                            />
+                        </Box>
+                    </div>
+                </Modal.Body>
+            </Modal>
             {showVideoEl ?
                 <div>
                     <div className="videocall">
@@ -124,7 +172,9 @@ export default function VistaClase() {
                     }
                     </div>
                     <div className="controls">
-                        <button className="control"><CallEnd color="error" /></button>  
+                        <button className="control" onClick={terminarClase} style={{width: '50px', height:'50px', borderRadius: '50px'}}>
+                            <CallEnd color="error" />
+                        </button>  
                     </div> 
                     <br/>
                     <br/>
