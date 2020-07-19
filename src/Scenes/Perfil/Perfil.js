@@ -9,6 +9,18 @@ const perfil = () => {
     const logged = useSelector(state => state.login);
     const token = useSelector(state => state.token);
     const user = useSelector(state => state.user);
+    const [mostrarEmail,setmostrarEmail] = useState(false);
+    const [mostrarContraseña, setmostrarContraseña] = useState(false);
+
+    const modificarContraseña = () =>{
+        setmostrarContraseña(true);
+        setmostrarEmail(false);
+    } 
+
+    const modificarEmail = () =>{
+        setmostrarEmail(true);
+        setmostrarContraseña(false);
+    }
 
     const { register, handleSubmit, errors, watch } = useForm({
         mode: 'onSubmit',
@@ -35,8 +47,14 @@ return(
                     <input type="text" className="form-control mb-1 mt-1" disabled={true} value={`Apellido: ${user.lastname}`}/>
                     <input type="text" className="form-control mb-1 mt-1" disabled={true} value={`Correo electrónico: ${user.email}`}/>
                     <input type="text" className="form-control mb-1 mt-1" disabled={true} value="Contraseña: ***********"/>
+                <div>
+                <div>
+                    <input className="btn btn-secondary" value="Modificar contraseña" type="submit" />
+                </div>
+                <div>
+                    <input className="btn btn-secondary" value="Modificar email" type="submit" />
+                </div>
                     
-                    <div>
                     {true?
                     <form  onSubmit={handleSubmit(onSubmit)}>
                         <div className="form-group">

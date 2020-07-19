@@ -48,7 +48,7 @@ export default function Cupones() {
                     setAlertdesign(false);
                 } else {
                     window.open(res.url, '_blank');
-                    if(data.email){
+                    if(!data.to){
                         setText('Cupon creado correctamente');
                     }else{
                         setText('Cupon regalado correctamente');
@@ -117,14 +117,14 @@ export default function Cupones() {
                             <td>
                                 <input className="mr-1" name="Developer" type="radio" value="Yes"  onChange={HideInput}
                                     ref={register({ required: {value:true, message: "* ¡debes seleccionar una!"}})}/>
-                                <label htmlFor="vincularCupon">Uso personal</label> 
+                                    <label htmlFor="vincularCupon">Uso personal</label> 
                             </td>
                         </tr>
                         <tr>
                             <td className="">
                                 <input className="mr-1" id="show" name="Developer" type="radio" value="No" onClick={ShowInput}
                                     ref={register({ required: {value:true, message: "* ¡Debes seleccionar una!"}})}/>
-                                <label htmlFor="vincularCupon">Regalar</label> 
+                                    <label htmlFor="vincularCupon">Regalar</label> 
                             </td>
                         </tr>
                     
@@ -149,6 +149,7 @@ export default function Cupones() {
                     <div className="center">
                         <input className="btn btn-secondary" value="Pagar cupon" type="submit" />
                     </div>
+                    <div style={{textAlign:"center"}}>
                     <Modal show={alertShow} onHide={() => {setAlertShow(false)}}>
                         <Modal.Header closeButton>
                             <div>
@@ -156,6 +157,7 @@ export default function Cupones() {
                             </div>
                         </Modal.Header> 
                     </Modal>
+                    </div>
                 </form>: ""}
 
                     {cupones.length > 0 && FormListarCupones?
