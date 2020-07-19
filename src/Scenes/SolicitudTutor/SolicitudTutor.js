@@ -58,7 +58,7 @@ export default function solicitudTutor() {
                 <Navbar/>
             </Header>
             <Body>
-                <div id="FormSolicitud" className="container mb-2 mt-4 center">
+                <div id="FormSolicitud" className="container  border jumbotron rounded shadow mb-2 mt-4 w-30 center bg-white  rounded">  
                     <form className="form" onSubmit={handleSubmit(formOnSubmit)} encType="multipart/form-data">
                         <div>
                         <h1 className="h1 mt-4 mb-4">Solicitud para realizar tutorías</h1>

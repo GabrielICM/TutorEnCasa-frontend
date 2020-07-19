@@ -2,8 +2,6 @@ import React, { useState } from 'react';
 import {Link} from 'react-router-dom';
 import {useSelector} from 'react-redux'; 
 import { RolUsuario } from '../util/usuario';
-import { Input } from '@material-ui/core';
-
 
 const navbarLogin = () => {
     const roles = useSelector(state => state.user ? state.user.roles : []);
@@ -29,18 +27,20 @@ const navbarLogin = () => {
             <Link to="/cupones" className="nav-link">
                 <li><h6 className="link">Mis cupones</h6></li>
             </Link>  
-            <Link to="/perfil" className="nav-link">
-                <li><h6 className="link">Perfil</h6></li>
-            </Link> 
             {esAdmin?
             <Link to="/Validar-Tutor" className="nav-link">
                 <li><h6 className="link">Validar tutor</h6></li>
             </Link>        
             :
             ""}
-            <li>
-                <Input type="button" className="link" on onClick={refreshPage} value="salir"/>
-            </li>    
+            <Link to="/perfil" className="nav-link">
+                <li><h6 className="link">Perfil</h6></li>
+            </Link> 
+            <Link className="nav-link" onClick={refreshPage} >
+                <li>
+                    <h6 className="link">Salir</h6>
+                </li>    
+            </Link>
         </ul>
     </nav>
     )

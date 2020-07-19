@@ -1,13 +1,17 @@
-import React from 'react';
+import React,{useState} from 'react';
 import { Header, Navbar, Footer, Body } from '../../Components';
 import { useForm } from 'react-hook-form';
 import Api from '../../Servicios/Peticion';
 import { useHistory } from "react-router-dom";
 import { useDispatch } from 'react-redux';
-
+import {Modal} from 'react-bootstrap';
 export default function App() {
     
 const { register, handleSubmit, errors } = useForm();
+
+const [text,setText] = useState();
+const [alertShow,setAlertShow] = useState(false);
+
 const history = useHistory();
 const dispach = useDispatch();
 
@@ -23,7 +27,8 @@ const onSubmit = data => {
             });
             history.push("/cupones");
         } else {
-            alert(Respuesta.error);
+            setText(Respuesta.error);
+            setAlertShow(true);
         }
     });
 };
@@ -51,10 +56,17 @@ return (
             <span className="text-danger text-small d-block mb-2">
                 {errors.password && errors.password.message}
             </span>
-            <div className="mb-2 mt-4 center" >
+            <div className="mb-2 mt-4 center">
                 <input className="btn btn-secondary" type="submit" value="Iniciar sesion" />
             </div>
     </form>
+    <Modal show={alertShow} onHide={() => {setAlertShow(false)}}>
+        <Modal.Header closeButton>
+            <div>
+                {text}
+            </div>
+        </Modal.Header> 
+    </Modal>
     </Body>
     <Footer/>
     </div> 

@@ -17,7 +17,7 @@ return(
         </Header>
         <Body>
             <div className="row">
-                <div className="col-3  border jumbotron rounded shadow p-3 mb-5 bg-white rounded">
+                <div className="col-3  border jumbotron rounded shadow p-3 mb-3 bg-white rounded">
                 <form onSubmit={handleSubmit(onSubmit)}>
                     <h1 className="h2">Filtrar:</h1>
                     <div>
@@ -96,8 +96,8 @@ return(
                     </div>
                 </form>
             </div>
-                <div className="col-9">
-                    <div className="card mt-3 mb-5 border jumbotron rounded shadow p-3 mb-5 bg-white rounded">
+                <div className="col-9 mb-3">
+                    <div className="card mb-5 border jumbotron rounded shadow p-3 mb-5 bg-white rounded">
                         <div className="card-header">
                             Gabriel Cárcamo
                         </div>

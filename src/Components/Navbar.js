@@ -12,7 +12,7 @@ const navbar = () => {
                         
                     </Link>
                 </div>
-                <div className="col-sm-4">
+                <div className="col" style={{ display: 'flex', justifyContent: 'flex-start' }}>
                     <ul className="nav" >
                         <Link to="/" className="nav-link">
                             <li><h6 className="link">Inicio</h6></li>
@@ -25,8 +25,7 @@ const navbar = () => {
                         </Link>
                     </ul>
                 </div>
-                <div className="col-sm-3"></div>
-                <div className="col-sm-4">
+                <div className="col" style={{ display: 'flex', justifyContent: 'flex-end' }}>
                     {login ? 
                         <NavbarLogin/>   
                         : 
@@ -39,7 +38,8 @@ const navbar = () => {
                             </Link>        
                         </ul>         
                     }          
-            </div>         
+                </div>
+                <div className="col-sm-1"></div>
             </div>   
         </nav>
         )

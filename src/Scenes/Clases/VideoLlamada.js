@@ -103,8 +103,9 @@ return(
                     <input className="form-control" type="text" id="nombre" disabled={true} placeholder="Sala de Video"/>
                     <input type="submit" value="Ingresar clase" disabled={true} className="mt-1"/>
                 </form>
-            
-                <input type="submit" value="Mis Clases" onClick={listarClases} />
+                <div className="center">
+                    <input className="btn btn-secondary" type="submit" value="Mis Clases" onClick={listarClases} />
+                </div>
             </div>
         </div>
         {tutorias?

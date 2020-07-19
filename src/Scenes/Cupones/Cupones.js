@@ -13,7 +13,6 @@ export default function Cupones() {
     const[FormListarCupones, setFormListarCupones] = useState(false);
     const [text,setText] = useState();
     const [alertShow,setAlertShow] = useState(false);
-    const [alertdesign,setAlertdesign] = useState(true);
     const[cupones, setCupones] = useState([]);
     
     const { register, handleSubmit, errors } = useForm();
@@ -44,8 +43,7 @@ export default function Cupones() {
         return await api('POST','/coupon/new', data, { 'access-token': token })
             .then((res) => {
                 if(res.status == 'failed') {
-                    setText((res.error).toString());
-                    setAlertdesign(false);
+                    setText(res.error);
                 } else {
                     window.open(res.url, '_blank');
                     if(!data.to){
@@ -68,15 +66,17 @@ export default function Cupones() {
     };
 
     const DatosCupones = cupones.map((cupon) => (
-    <div className="card mt-3 mb-5">
-        <div className="card-header" key={cupon.code}>
-            Código: {cupon.code}
-        </div>
-        <div className="card-body">
-            <blockquote className="blockquote mb-0">
-                <p key={cupon.code}>Cupón valido por ${cupon.value}</p>
-                    <footer className="blockquote-footer">¡Ocupa este cupón con sabiduría!</footer>
-            </blockquote>
+    <div className="container border jumbotron rounded shadow p-3 mt-3 bg-white rounded">
+        <div className="card mt-3 mb-5">
+            <div className="card-header" key={cupon.code}>
+                Código: {cupon.code}
+            </div>
+            <div className="card-body">
+                <blockquote className="blockquote mb-0">
+                    <p key={cupon.code}>Cupón valido por ${cupon.value}</p>
+                        <footer className="blockquote-footer">¡Ocupa este cupón con sabiduría!</footer>
+                </blockquote>
+            </div>
         </div>
     </div>
     ))
@@ -91,8 +91,8 @@ export default function Cupones() {
         <Body>
             <div>
                 <div>
-                    <input type="submit" value="Mis cupones"  onClick={ShowFormListar}/>
-                    <input type="submit" value="Comprar cupón" onClick={ShowFormComprar}/>
+                    <input className="btn btn-secondary" type="submit" value="Mis cupones"  onClick={ShowFormListar}/>
+                    <input className="btn btn-secondary border-left" type="submit" value="Comprar cupón" onClick={ShowFormComprar}/>
 
                     {FormComprar? 
                     
@@ -116,7 +116,7 @@ export default function Cupones() {
                         <tr>
                             <td>
                                 <input className="mr-1" name="Developer" type="radio" value="Yes"  onChange={HideInput}
-                                    ref={register({ required: {value:true, message: "* ¡debes seleccionar una!"}})}/>
+                                    ref={register({ required: {value:true, message: "* ¡Debes seleccionar una!"}})}/>
                                     <label htmlFor="vincularCupon">Uso personal</label> 
                             </td>
                         </tr>
