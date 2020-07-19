@@ -45,12 +45,13 @@ return(
                     
                     <input type="text" className="form-control mb-1 mt-1" disabled={true} value={`Nombre: ${user.firstname}`}/>
                     <input type="text" className="form-control mb-1 mt-1" disabled={true} value={`Apellido: ${user.lastname}`}/>
+                    <div>
+                        <input className="btn btn-secondary" value="Modificar contraseña" type="submit" />
+                    </div>
                     <input type="text" className="form-control mb-1 mt-1" disabled={true} value={`Correo electrónico: ${user.email}`}/>
                     <input type="text" className="form-control mb-1 mt-1" disabled={true} value="Contraseña: ***********"/>
                 <div>
-                <div>
-                    <input className="btn btn-secondary" value="Modificar contraseña" type="submit" />
-                </div>
+                
                 <div>
                     <input className="btn btn-secondary" value="Modificar email" type="submit" />
                 </div>
