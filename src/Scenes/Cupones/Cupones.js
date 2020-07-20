@@ -47,9 +47,9 @@ export default function Cupones() {
                 } else {
                     window.open(res.url, '_blank');
                     if(!data.to){
-                        setText('Cupon creado correctamente');
+                        setText('Cupón creado correctamente');
                     }else{
-                        setText('Cupon regalado correctamente');
+                        setText('Cupón regalado correctamente');
                     }
                 }
                 setAlertShow(true);
@@ -65,20 +65,20 @@ export default function Cupones() {
         })
     };
 
-    const DatosCupones = cupones.map((cupon) => (
-    <div className="container border jumbotron rounded shadow p-3 mt-3 bg-white rounded">
-        <div className="card mt-3 mb-5">
-            <div className="card-header" key={cupon.code}>
-                Código: {cupon.code}
-            </div>
-            <div className="card-body">
-                <blockquote className="blockquote mb-0">
-                    <p key={cupon.code}>Cupón valido por ${cupon.value}</p>
-                        <footer className="blockquote-footer">¡Ocupa este cupón con sabiduría!</footer>
-                </blockquote>
+    const DatosCupones = cupones.map((cupon) => ( 
+        <div className="container border jumbotron rounded shadow p-3 mt-3 bg-white rounded">
+            <div className="card mt-3 mb-5">
+                <div className="card-header" key={cupon.code}>
+                    Código: {cupon.code}
+                </div>
+                <div className="card-body">
+                    <blockquote className="blockquote mb-0">
+                        <p key={cupon.code}>Cupón válido por ${cupon.value}</p>
+                            <footer className="blockquote-footer">¡Ocupa este cupón con sabiduría!</footer>
+                    </blockquote>
+                </div>
             </div>
         </div>
-    </div>
     ))
     
     if(! logged)
@@ -134,11 +134,11 @@ export default function Cupones() {
                             <td>
                             <div className="form-group"> 
                                 <label htmlFor="vincularCupon">Correo electrónico</label>   
-                                <input id="email" className="form-control " type="email" placeholder="Email" name="to" 
-                                ref={register({required: {value: true,message: "* Correo invalido" ,pattern: /^\S+@\S+$/i}})} />
+                                <input id="email" className="form-control " type="email" placeholder="Correo electrónico" name="to" 
+                                ref={register({required: {value: true,message: "* Correo inválido" ,pattern: /^\S+@\S+$/i}})} />
                             </div>
                             <span className="text-danger text-small d-block mb-2">
-                                {errors.email && errors.email.message}
+                                {errors.to && errors.to.message}
                             </span>
                             </td>
                         </tr>
@@ -147,7 +147,7 @@ export default function Cupones() {
                     </table>
 
                     <div className="center">
-                        <input className="btn btn-secondary" value="Pagar cupon" type="submit" />
+                        <input className="btn btn-secondary" value="Pagar cupón" type="submit" />
                     </div>
                     <div style={{textAlign:"center"}}>
                     <Modal show={alertShow} onHide={() => {setAlertShow(false)}}>

@@ -11,9 +11,9 @@ const inicio = () => {
         <Body>
         <div id="carouselExampleControls" className="carousel slide container pt-1 center " data-ride="carousel">
             <ol className="carousel-indicators">
-                <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-                <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-                <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+                <li data-target="#carouselExampleControls" data-slide-to="0" class="active"></li>
+                <li data-target="#carouselExampleControls" data-slide-to="1"></li>
+                <li data-target="#carouselExampleControls" data-slide-to="2"></li>
             </ol>
             <div className="carousel-inner">
                 <div className="carousel-item active">

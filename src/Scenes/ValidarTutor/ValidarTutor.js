@@ -57,22 +57,24 @@ const VistaAdministrador = () => {
     }
 
         const datosTutor = soliTutor.map((solicitud) => (
-            <div className="card mt-3" style={{width: "18rem"}}>
-                <div className="card-body" key={solicitud.id}>
-                    <h5 className="card-title" >{solicitud.user.firstname} {solicitud.user.lastname}</h5>
-                    <p className="card-text">Email: {solicitud.user.email}</p>
+            <div className="col p-3">
+                <div className="card mt-3" style={{width: "18rem"}}>
+                    <div className="card-body" key={solicitud.id}>
+                        <h5 className="card-title" >{solicitud.user.firstname} {solicitud.user.lastname}</h5>
+                        <p className="card-text">Email: {solicitud.user.email}</p>
+                    </div>
+                    <ul className="list-group list-group-flush">
+                        <li className="list-group-item" >
+                            <input className="btn btn-info" style={{width:"100%"}} type="submit"  value="Certificado" onClick={() => apiPeticioncertificado(solicitud.id)} />
+                        </li>
+                        <li className="list-group-item">
+                            <input className="btn btn-success" style={{width:"100%"}} type="submit" value="Aceptar" onClick={() =>apiValidarTutor(1, solicitud.id)} />   
+                        </li>
+                        <li className="list-group-item">
+                            <input className="btn btn-danger" style={{width:"100%"}} type="submit"value="Rechazar" onClick={()=> apiValidarTutor(0, solicitud.id)} />
+                        </li>
+                    </ul>
                 </div>
-                <ul className="list-group list-group-flush">
-                    <li className="list-group-item" >
-                        <input className="btn btn-info" style={{width:"100%"}} type="submit"  value="Certificado" onClick={() => apiPeticioncertificado(solicitud.id)} />
-                    </li>
-                    <li className="list-group-item">
-                        <input className="btn btn-success" style={{width:"100%"}} type="submit" value="Aceptar" onClick={() =>apiValidarTutor(1, solicitud.id)} />   
-                    </li>
-                    <li className="list-group-item">
-                        <input className="btn btn-danger" style={{width:"100%"}} type="submit"value="Rechazar" onClick={()=> apiValidarTutor(0, solicitud.id)} />
-                    </li>
-                </ul>
             </div>
         ))
 
@@ -85,9 +87,9 @@ const VistaAdministrador = () => {
          </Header>
         <Body>
             <div>
-                <input type="submit" value="Solicitudes" ref={listarTutoresBoton} onClick={apiSolicitud}/>
+                <input className="btn btn-secondary" type="submit" value="Solicitudes" ref={listarTutoresBoton} onClick={apiSolicitud}/>
                 {succes? 
-                    <div>
+                    <div className="row mb-5">
                         {datosTutor}
                     </div>:
                     ""

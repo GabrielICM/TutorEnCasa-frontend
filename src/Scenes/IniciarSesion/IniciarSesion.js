@@ -25,7 +25,7 @@ const onSubmit = data => {
                 token: Respuesta.token,
                 login: true
             });
-            history.push("/cupones");
+            history.push("/tutorias");
         } else {
             setText(Respuesta.error);
             setAlertShow(true);
@@ -42,8 +42,8 @@ return (
         <form className="container upload border jumbotron rounded shadow p-3 mb-5 bg-white rounded" onSubmit={handleSubmit(onSubmit)}>
             <div className="form-group">
                 <label htmlFor="email">Correo electrónico</label>   
-                <input id="email" className="form-control" type="email" placeholder="Email" name="email" 
-                ref={register({required: {value: true,message: "* Correo invalido" ,pattern: /^\S+@\S+$/i}})} />
+                <input id="email" className="form-control" type="email" placeholder="Correo electrónico" name="email" 
+                ref={register({required: {value: true,message: "* Correo inválido" ,pattern: /^\S+@\S+$/i}})} />
             </div>
             <span className="text-danger text-small d-block mb-2">
                 {errors.email && errors.email.message}

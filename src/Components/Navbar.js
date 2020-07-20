@@ -10,7 +10,7 @@ const navbar = () => {
             <div className="row">
                 <div className="col-sm-1  center">
                     <Link to="/" className="noPadding">
-                        <img style={{width: "50px", height: "50px"}} src={'/Images/logo.png'} />
+                        <img style={{width: "50px", height: "50px"}} src={'/public/Images/logo.png'} />
                     </Link>
                 </div>
                 <div className="col" style={{ display: 'flex', justifyContent: 'flex-start' }}>

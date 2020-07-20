@@ -27,7 +27,7 @@ const perfil = () => {
 
 	const onSubmit = (data) => {
 		api("PUT", "/user/profile", data, { "access-token": token }).then((res) => {
-		if (res.status == "succes") {
+		if (res.status == "success") {
 			setText("Modificado!");
 		} else {
 			setText(res.error);
@@ -160,7 +160,7 @@ const perfil = () => {
 					{showPassword ? (
 						<form onSubmit={handleSubmit(onSubmit)}>
 						<div className="form-group">
-							<label htmlFor="contraseñaActual">Contraseña</label>
+							<label htmlFor="contraseñaActual">Contraseña actual</label>
 							<input
 							className="form-control"
 							type="password"
@@ -175,12 +175,12 @@ const perfil = () => {
 							/>
 						</div>
 						<div className="form-group">
-							<label htmlFor="contraseña">Contraseña</label>
+							<label htmlFor="contraseña">Nueva contraseña</label>
 							<input
 							className="form-control"
 							type="password"
 							id="contraseña"
-							placeholder="Contraseña"
+							placeholder="Nueva contraseña"
 							name="passwordFirst"
 							ref={register({
 								required: true,
@@ -194,13 +194,13 @@ const perfil = () => {
 						</span>
 						<div className="form-group">
 							<label htmlFor="repetirContraseña">
-							Repetir Contraseña
+							Repetir nueva contraseña
 							</label>
 							<input
 							className="form-control"
 							type="password"
 							id="repetirContraseña"
-							placeholder="Repetir contraseña"
+							placeholder="Repetir nueva contraseña"
 							name="password"
 							ref={register({
 								validate: (value) =>
@@ -228,12 +228,13 @@ const perfil = () => {
 
 					{showEmail ? (
 						<div>
-						<label htmlFor="email">Correo electronico</label>
+						<form onSubmit={handleSubmit(onSubmit)}>
+						<label htmlFor="email">Nuevo correo electrónico</label>
 						<input
 							className="form-control"
 							type="text"
 							id="email"
-							placeholder="Email"
+							placeholder="Correo electrónico"
 							name="email"
 							ref={register({
 							required: true,
@@ -243,31 +244,30 @@ const perfil = () => {
 							},
 							})}
 						/>
-
 						<span className="text-danger text-small d-block mb-2">
 							{errors.email && errors.email.message}
 						</span>
+
 						<div className="form-group">
 							<label htmlFor="email2">
-							Repetir correo electronico
+							Repetir nuevo correo electronico
 							</label>
 							<input
 							className="form-control"
 							type="email"
-							id="repetirContraseña"
-							placeholder="Repetir contraseña"
+							id="email2"
+							placeholder="Correo electrónico"
 							name="email2"
 							ref={register({
-								validate: (value) =>
-								watch("email") === value ||
-								"* Los correos no coinciden",
+								validate: (value) => watch("email") === value || "* Los correos no coinciden",
 								required: true,
 							})}
 							/>
+							<span className="text-danger text-small d-block mb-2">
+								{errors.email2 && errors.email2.message}
+							</span>
 						</div>
-						<span className="text-danger text-small d-block mb-2">
-							{errors.email2 && errors.email2.message}
-						</span>
+
 
 						<div className="center">
 							<input
@@ -276,6 +276,7 @@ const perfil = () => {
 							type="submit"
 							/>
 						</div>
+						</form>
 						</div>
 					) : (
 						""

@@ -48,7 +48,6 @@ const registro = () => {
             .then((res) => {
                 if(res.status == 'failed') {
                     setText((res.error).toString());
-                    setAlertShow(true);
                 }
                 else {
                     setValidarCuenta((params.paso && params.run) ? false : true);
@@ -57,6 +56,7 @@ const registro = () => {
                         setText('Registro completado');
                     }
                 }
+                setAlertShow(true);
             });
     }
     console.log(errors);
@@ -111,8 +111,8 @@ return(
                                 <h1 className="center h2">Completa tus datos</h1>
                             </div>
                             <div className="form-group">
-                                <label htmlFor="email">Correo electronico</label>
-                                <input className="form-control" type="text" id="email" placeholder="Email" name="email" 
+                                <label htmlFor="email">Correo electrónico</label>
+                                <input className="form-control" type="text" id="email" placeholder="Correo electrónico" name="email" 
                                 ref={register({required: true, pattern: { value: /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/i,
                                 message: 'Correo inválido' }})} />
                             </div>
