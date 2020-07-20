@@ -28,8 +28,7 @@ const perfil = () => {
         api('PUT','/user/profile',data,{ 'access-token': token })
             .then((res)=>{
                 if(res.status =='succes'){
-                    setText('Modificado!');
-                    
+                    setText('Modificado!');    
                 }else{
                     setText(res.error);
                     console.log(res.error);
@@ -49,9 +48,9 @@ const perfil = () => {
         })
     };
 
-    const datosCupones = horario.map((horarios) => (
-        <div className="form-group" key={horario.id}>
-            <input type="text" className="form-control mb-1 mt-1" disabled={true} value={`${horario.start}`}/>
+    const datosHorario = horario.map((horarios) => (
+        <div className="form-group" key={horarios.id}>
+            <input type="text" className="form-control mb-1 mt-1" disabled={true} value={`${horarios.start}`}/>
         </div>
         ))
 
@@ -215,7 +214,7 @@ return(
                         </div>
                         <div className="row">
                             <div>
-                                {datosCupones}
+                                {datosHorario}
                             </div>
                         </div>
                     </form>

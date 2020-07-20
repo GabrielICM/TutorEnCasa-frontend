@@ -1,15 +1,56 @@
 import React,{useState} from 'react';
-import { Header, Navbar, Body, Footer } from '../../Components';
-import {useForm} from 'react-hook-form';
+import api from '../../Servicios/Peticion';
 import Rating from '@material-ui/lab/Rating';
-import { TextField, MenuItem, Box } from '@material-ui/core';
-
+import {useForm} from 'react-hook-form';
+import {useSelector} from 'react-redux';
+import { Header, Navbar, Body, Footer } from '../../Components';
+import { Box } from '@material-ui/core';
+import {Modal} from 'react-bootstrap';
 const precios = () => {
 
     const { register, handleSubmit, errors } = useForm();
-    const [ratingValue, setRatingValue] = React.useState(1);
+    const [ratingValue, setRatingValue] = useState(1);
+    const [tutores, setTutores] = useState([]);
+    const logged = useSelector(state => state.login);
+    const token = useSelector(state => state.token);
+    
+    const [text,setText] = useState();
+    const [alertShow,setAlertShow] = useState(false);
+
     const onSubmit = data => console.log(data);
         console.log(errors);
+
+    const apiTutor = data =>{
+        api('GET',`/tutor/${data.id}`,{}, {'access-token': token})
+            .then((res) => {
+                if(res.status == 'success'){
+                    console.log(res)
+                    setTutores([res.tutor]);
+                }else{
+                    console.log(res.error)
+                }
+            })
+    };
+
+    const showTutoresCard = tutores.map((tutor)=>(
+        
+            <div className="card mb-5 border jumbotron rounded shadow p-3 mb-5 bg-white rounded" >
+                <div className="card-header" key={tutor.id}>
+                    {tutor.id_user}
+                </div>
+                <div className="card-body">
+                    <blockquote className="blockquote mb-0">
+                        <p>
+                            Área: {tutor.themes[0].name} Grado de enseñanza: {tutor.themes[0].TutorTheme.grade} Valor: {tutor.themes[0].TutorTheme.price}
+                        </p>
+                        <footer className="blockquote-footer">
+                            {tutor.id}
+                        </footer>
+                    </blockquote>
+                </div>
+            </div>
+    )
+    )
 return(
     <div>
         <Header>
@@ -91,25 +132,23 @@ return(
                             </td>
                         </tr>
                     </div>
-                    <div className="center">
+                    <div className="center" >
                         <input className="btn btn-secondary" value="Filtrar" type="submit" />
                     </div>
                 </form>
+                </div >
+                <div className="col-9 mb-3" >
+                    <input type="submit" onClick={apiTutor({id:1})}/>
+                    {showTutoresCard}
+                </div>
             </div>
-                <div className="col-9 mb-3">
-                    <div className="card mb-5 border jumbotron rounded shadow p-3 mb-5 bg-white rounded">
-                        <div className="card-header">
-                            Gabriel Cárcamo
+            <Modal show={alertShow} onHide={() => {setAlertShow(false)}}>
+                    <Modal.Header closeButton>
+                        <div>
+                            {text}
                         </div>
-                        <div className="card-body">
-                            <blockquote className="blockquote mb-0">
-                                <p>Valoracion</p>
-                                    <footer className="blockquote-footer">Soy un lord dentro de los profesores</footer>
-                            </blockquote>
-                        </div>
-                    </div>
-                </div> 
-            </div>
+                    </Modal.Header> 
+                </Modal>
         </Body>
         <Footer/>
     </div>    
