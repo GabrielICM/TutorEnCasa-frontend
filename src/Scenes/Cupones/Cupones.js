@@ -164,7 +164,9 @@ export default function Cupones() {
                         <div>{DatosCupones}</div>
                         :
                         (FormListarCupones?
-                        <p className="center">No tienes cupones</p>
+                        <div className="col-3  border jumbotron rounded shadow p-3 mb-3 bg-white rounded">
+                            <p className="center">No tienes cupones</p>
+                        </div>
                         :
                         ""
                         )

@@ -2,14 +2,15 @@ import React, { Fragment } from 'react';
 import {useSelector} from 'react-redux';
 import {Link} from 'react-router-dom';
 import { NavbarLogin } from './index';
+
 const navbar = () => {
         const login = useSelector(state => state.login);
         return(    
         <nav >
             <div className="row">
-                <div className="col-sm-1">
-                    <Link to="/" className="nav-link">
-                        
+                <div className="col-sm-1  center">
+                    <Link to="/" className="noPadding">
+                        <img style={{width: "50px", height: "50px"}} src={'/Images/logo.png'} />
                     </Link>
                 </div>
                 <div className="col" style={{ display: 'flex', justifyContent: 'flex-start' }}>
