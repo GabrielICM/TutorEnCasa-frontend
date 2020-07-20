@@ -36,7 +36,7 @@ const navbarLogin = () => {
             <Link to="/perfil" className="nav-link">
                 <li><h6 className="link">Perfil</h6></li>
             </Link> 
-            <Link className="nav-link" onClick={refreshPage} >
+            <Link to='#' className="nav-link" onClick={refreshPage} >
                 <li>
                     <h6 className="link">Salir</h6>
                 </li>    
