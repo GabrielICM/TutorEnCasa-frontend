@@ -84,24 +84,27 @@ const perfil = () => {
 		</Header>
 		<Body>
 			<div>
-			<input
-				className="btn btn-secondary"
-				type="submit"
-				value="Mis datos"
-				onClick={ShowPerfil}
-			/>
 			{esTutor ? (
-				<input
-				className="btn btn-secondary border-left"
-				type="submit"
-				value="Crear horario"
-				onClick={ShowHorario}
-				/>
+				<div>
+					<input
+						className="btn btn-secondary"
+						type="submit"
+						value="Mis datos"
+						onClick={ShowPerfil}
+					/>
+				
+					<input
+					className="btn btn-secondary border-left"
+					type="submit"
+					value="Crear horario"
+					onClick={ShowHorario}
+					/>
+				</div>
 			) : (
 				""
 			)}
 
-			{showPerfil ? (
+			{(showPerfil || ! esTutor) ? (
 				<div
 				className="container upload border jumbotron rounded shadow p-3 mt-3 bg-white rounded"
 				style={{ width: "50%" }}

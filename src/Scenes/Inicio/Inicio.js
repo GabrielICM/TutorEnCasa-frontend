@@ -41,12 +41,12 @@ const inicio = () => {
         <div className="row">
             <div className="col">
                 <h1 className="h3 center"> ¿Quieres ser tutor?</h1>
-                <p className="pText">Sólo debes registrarte con tu correo y completas los datos solicitados que serán mostrados en tu perfil, todo rápido y fácil.</p>
+                <p className="pText">Te buscamos a tí universitario o egresado. Sólo debes registrarte con tu correo, completas los datos solicitados, los cuales serán mostrados en tu perfil. Finalmente solicita ser tutor con tu certificiado de alumno regular y te validaremos en las próximas 24 horas.</p>
             </div>
             <div className="vertical-line"></div>
             <div className="col awayFooter">
                 <h1 className="h3 center"> ¿Quieres ser estudiante?</h1>
-                <p className="pText">Sólo debes registrarte con tu correo y completas los datos solicitados que serán mostrados en tu perfil, todo rápido y fácil.</p>
+                <p className="pText">Sólo debes registrarte con tu correo, completas los datos solicitados, los cuales serán mostrados en tu perfil. Todo rápido y sencillo.</p>
             </div>
         </div>
 
