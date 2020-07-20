@@ -29,7 +29,6 @@ const registro = () => {
 
     const [validarCuenta, setValidarCuenta] = useState(false);
     const [alertShow,setAlertShow] = useState(false);
-    const [alertShowRegister,setAlertShowRegister] = useState(false);
     const [text,setText] = useState();
     const params = getParams();
     
@@ -48,15 +47,16 @@ const registro = () => {
             .then((res) => {
                 if(res.status == 'failed') {
                     setText((res.error).toString());
+                    setAlertShow(true);
                 }
                 else {
                     setValidarCuenta((params.paso && params.run) ? false : true);
-                    setAlertShowRegister(true);
                     if(step==2){
                         setText('Registro completado');
+                        setAlertShow(true);
                     }
                 }
-                setAlertShow(true);
+                
             });
     }
     console.log(errors);
@@ -153,13 +153,6 @@ return(
                         {
                             validarCuenta
                             ?
-                            <Modal show={alertShowRegister} onHide={() => {setAlertShowRegister(false)}}>
-                                <Modal.Header closeButton>
-                                    <div>
-                                        Valida tu registro
-                                    </div>
-                                </Modal.Header> 
-                                <Modal.Body>
                                 <Link 
                                     to={'https://tutorencasa.awsapps.com/mail'} 
                                     target="_blank" 
@@ -167,9 +160,7 @@ return(
                                     
                                     Valida tu cuenta aquí
                                 </Link>
-                                </Modal.Body>
-                            </Modal>
-                            
+
                             : 
                             ''
                         }
