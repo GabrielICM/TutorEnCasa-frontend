@@ -21,35 +21,36 @@ const precios = () => {
         console.log(errors);
 
     const apiTutor = data =>{
-        api('GET',`/tutor/${data.id}`,{}, {'access-token': token})
+        api('GET',`/tutor`,{})
             .then((res) => {
                 if(res.status == 'success'){
                     console.log(res)
-                    setTutores([res.tutor]);
+                    setTutores(res.tutors);
                 }else{
                     console.log(res.error)
                 }
             })
     };
 
-    const showTutoresCard = tutores.map((tutor)=>(
-        
+    const showTutoresCard = tutores.map((tutor)=> {
+        const themes = tutor.themes.map((theme) => (<span>{theme.name}</span>));
+        return (
             <div className="card mb-5 border jumbotron rounded shadow p-3 mb-5 bg-white rounded" >
                 <div className="card-header" key={tutor.id}>
-                    {tutor.id_user}
+                    {tutor.user.firstname} {tutor.user.lastname}
                 </div>
                 <div className="card-body">
                     <blockquote className="blockquote mb-0">
                         <p>
-                            Área: {tutor.themes[0].name} Grado de enseñanza: {tutor.themes[0].TutorTheme.grade} Valor: {tutor.themes[0].TutorTheme.price}
+                            Temas: {themes}
                         </p>
                         <footer className="blockquote-footer">
-                            {tutor.id}
+                            ¡Valoracion de {parseInt(tutor.rating)} estrellas!
                         </footer>
                     </blockquote>
                 </div>
             </div>
-    )
+        )}
     )
 return(
     <div>
@@ -138,7 +139,7 @@ return(
                 </form>
                 </div >
                 <div className="col-9 mb-3" >
-                    <input type="submit" onClick={apiTutor({id:1})}/>
+                    <input type="submit" hidden="true" onClick={apiTutor({})}/>
                     {showTutoresCard}
                 </div>
             </div>
