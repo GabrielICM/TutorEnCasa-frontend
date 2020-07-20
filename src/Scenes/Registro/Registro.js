@@ -81,7 +81,7 @@ return(
                                 <div className="form-group">
                                     <label htmlFor="firstname">Nombre</label>
                                     <input className="form-control" type="text" placeholder="Nombre" name="firstname" id="firstname" 
-                                    ref={register({required: true,minLength: 6, maxLength: 20, pattern: { value: /^[a-z]+/i,
+                                    ref={register({required: true,minLength: 3, maxLength: 20, pattern: { value: /^[a-z]+/i,
                                     message:"* Nombre inválido" }})} />
                                 </div>
                                 <span className="text-danger text-small d-block mb-2">
@@ -90,7 +90,7 @@ return(
                                 <div className="form-group">
                                     <label htmlFor="lastname">Apellido</label>
                                     <input className="form-control" type="text" placeholder="lastname" name="lastname" 
-                                    ref={register({required: true,minLength: 6, maxLength: 20, pattern: { value: /^[a-z]+/i,
+                                    ref={register({required: true,minLength: 3, maxLength: 20, pattern: { value: /^[a-z]+/i,
                                     message:"* Apellido inválido" }})} />
                                 </div>
                                 <span className="text-danger text-small d-block mb-2">
@@ -173,14 +173,15 @@ return(
                             : 
                             ''
                         }
+                            <Modal show={alertShow} onHide={() => {setAlertShow(false)}}>
+                                <Modal.Header closeButton>
+                                    <div>
+                                        {text}
+                                    </div>
+                                </Modal.Header> 
+                            </Modal>
+                 
                     </div>
-                    <Modal show={alertShow} onHide={() => {setAlertShow(false)}}>
-                        <Modal.Header closeButton>
-                            <div>
-                                {text}
-                            </div>
-                        </Modal.Header> 
-                    </Modal>
                 </form>
             </div>
         </Body>

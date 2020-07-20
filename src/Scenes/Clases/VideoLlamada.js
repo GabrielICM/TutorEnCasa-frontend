@@ -77,11 +77,18 @@ const videoLlamada = () => {
                         
                     </blockquote>
                 </div>
-                <Link to={`/clase?id=${clase.id}&init`} style={{ textDecoration: 'none' }} className='btn btn-secondary'>Iniciar clase</Link> 
-                <Link to={`/clase?id=${clase.id}`} style={{ textDecoration: 'none' }} className='btn btn-secondary'>Entrar a la clase</Link> 
-                {/*roles.includes(RolUsuario.TUTOR)
+            
+
+                {roles.includes(RolUsuario.TUTOR)
                     ?
-                    :*/
+                    <div>
+                        <Link to={`/clase?id=${clase.id}&init`} style={{ textDecoration: 'none', width: "100%"}} className='btn btn-secondary mb-1'>Iniciar clase</Link> 
+                        <br/>
+                        <Link to={`/clase?id=${clase.id}`} style={{ textDecoration: 'none',width: "100%" }} className='btn btn-secondary'>Entrar a la clase</Link> 
+                    </div>
+
+                    :
+                    <Link to={`/clase?id=${clase.id}`} style={{ textDecoration: 'none',width: "100%" }} className='btn btn-secondary'>Entrar a la clase</Link> 
                 }
             </div>
         );
@@ -95,14 +102,6 @@ return(
     <Body>
         <div>
             <div className="container upload border jumbotron rounded shadow p-3 mb-5 bg-white rounded">
-                <form className="form-group"  onSubmit={handleSubmit(crearSubmit)}>
-                    <input className="form-control " type="text" name="nombre" disabled={true}  id="nombreSala" placeholder="Sala de Video"/>
-                    <input type="submit" value="Iniciar clase" disabled={true} className="mt-1"/>
-                </form>
-                <form className="form-group" onSubmit={handleSubmit(ingresarSubmit)}>
-                    <input className="form-control" type="text" id="nombre" disabled={true} placeholder="Sala de Video"/>
-                    <input type="submit" value="Ingresar clase" disabled={true} className="mt-1"/>
-                </form>
                 <div className="center">
                     <input className="btn btn-secondary" type="submit" value="Mis Clases" onClick={listarClases} />
                 </div>
