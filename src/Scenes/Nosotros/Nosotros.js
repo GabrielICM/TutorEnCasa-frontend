@@ -18,7 +18,7 @@ return(
             </div>
             <div className="row">
                 <div className="col">
-                    <h1 className="h3 center">¿Quienes somos?</h1>
+                    <h1 className="h3 center">¿Quiénes somos?</h1>
                     <p className="pText">
                     Somos una empresa emergente, que busca la excelencia en el servicio de tutorías.
                     </p>
